@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Page
+    x:Class="Reorder.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="using:Reorder.Models"
+    PreviewKeyDown="Page_PreviewKeyDown"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <Style x:Key="RoundIconButtonStyle" TargetType="Button" BasedOn="{StaticResource DefaultButtonStyle}">
+            <Setter Property="Width" Value="44" />
+            <Setter Property="Height" Value="44" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="CornerRadius" Value="22" />
+        </Style>
+
+        <MenuFlyout x:Key="ItemMenu" Opening="ItemMenu_Opening">
+            <MenuFlyoutItem Text="预览" Click="MenuPreview_Click">
+                <MenuFlyoutItem.Icon>
+                    <FontIcon Glyph="&#xE8A1;" />
+                </MenuFlyoutItem.Icon>
+            </MenuFlyoutItem>
+            <MenuFlyoutSeparator />
+            <MenuFlyoutItem Text="移到最前" Click="MoveToStart_Click">
+                <MenuFlyoutItem.Icon>
+                    <FontIcon Glyph="&#xE74A;" />
+                </MenuFlyoutItem.Icon>
+            </MenuFlyoutItem>
+            <MenuFlyoutItem Text="移到最后" Click="MoveToEnd_Click">
+                <MenuFlyoutItem.Icon>
+                    <FontIcon Glyph="&#xE74B;" />
+                </MenuFlyoutItem.Icon>
+            </MenuFlyoutItem>
+            <MenuFlyoutSeparator />
+            <MenuFlyoutItem Text="移除 EXIF" Click="MenuStripExif_Click">
+                <MenuFlyoutItem.Icon>
+                    <FontIcon Glyph="&#xE8EC;" />
+                </MenuFlyoutItem.Icon>
+            </MenuFlyoutItem>
+        </MenuFlyout>
+    </Page.Resources>
+
+    <Grid x:Name="RootGrid" AllowDrop="True">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!--  Header  -->
+        <Grid Padding="20,0,12,8" ColumnSpacing="16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <StackPanel VerticalAlignment="Center" Spacing="2">
+                <TextBlock
+                    x:Name="FolderNameText"
+                    Style="{StaticResource SubtitleTextBlockStyle}"
+                    Text="未打开文件夹"
+                    TextTrimming="CharacterEllipsis" />
+                <TextBlock
+                    x:Name="SummaryText"
+                    Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                    Style="{StaticResource CaptionTextBlockStyle}"
+                    Text="打开一个包含图片的文件夹开始"
+                    TextTrimming="CharacterEllipsis" />
+            </StackPanel>
+
+            <StackPanel
+                Grid.Column="1"
+                VerticalAlignment="Center"
+                Orientation="Horizontal"
+                Spacing="8">
+                <CommandBar
+                    x:Name="Toolbar"
+                    Background="Transparent"
+                    DefaultLabelPosition="Right"
+                    OverflowButtonVisibility="Collapsed">
+                    <AppBarButton
+                        x:Name="OpenButton"
+                        Click="OpenFolder_Click"
+                        Label="打开"
+                        ToolTipService.ToolTip="打开文件夹 (Ctrl+O)">
+                        <AppBarButton.Icon>
+                            <FontIcon Glyph="&#xE838;" />
+                        </AppBarButton.Icon>
+                        <AppBarButton.KeyboardAccelerators>
+                            <KeyboardAccelerator Key="O" Modifiers="Control" />
+                        </AppBarButton.KeyboardAccelerators>
+                    </AppBarButton>
+                    <AppBarSeparator />
+                    <AppBarButton
+                        x:Name="UndoButton"
+                        Click="Undo_Click"
+                        Label="撤销"
+                        LabelPosition="Collapsed"
+                        ToolTipService.ToolTip="撤销 (Ctrl+Z)">
+                        <AppBarButton.Icon>
+                            <FontIcon Glyph="&#xE7A7;" />
+                        </AppBarButton.Icon>
+                        <AppBarButton.KeyboardAccelerators>
+                            <KeyboardAccelerator Key="Z" Modifiers="Control" />
+                        </AppBarButton.KeyboardAccelerators>
+                    </AppBarButton>
+                    <AppBarButton
+                        x:Name="RedoButton"
+                        Click="Redo_Click"
+                        Label="重做"
+                        LabelPosition="Collapsed"
+                        ToolTipService.ToolTip="重做 (Ctrl+Y)">
+                        <AppBarButton.Icon>
+                            <FontIcon Glyph="&#xE7A6;" />
+                        </AppBarButton.Icon>
+                        <AppBarButton.KeyboardAccelerators>
+                            <KeyboardAccelerator Key="Y" Modifiers="Control" />
+                            <KeyboardAccelerator Key="Z" Modifiers="Control,Shift" />
+                        </AppBarButton.KeyboardAccelerators>
+                    </AppBarButton>
+                    <AppBarSeparator />
+                    <AppBarButton
+                        x:Name="SortButton"
+                        Click="SortByName_Click"
+                        Label="按文件名排序">
+                        <AppBarButton.Icon>
+                            <FontIcon Glyph="&#xE8CB;" />
+                        </AppBarButton.Icon>
+                    </AppBarButton>
+                    <AppBarButton
+                        x:Name="PreviewButton"
+                        Click="PreviewButton_Click"
+                        Label="预览"
+                        ToolTipService.ToolTip="预览 (Enter / 双击)">
+                        <AppBarButton.Icon>
+                            <FontIcon Glyph="&#xE8A1;" />
+                        </AppBarButton.Icon>
+                    </AppBarButton>
+                    <AppBarButton
+                        x:Name="StripButton"
+                        Click="StripExif_Click"
+                        Label="移除 EXIF"
+                        ToolTipService.ToolTip="移除所选图片（未选择时为全部）的 EXIF 等元数据">
+                        <AppBarButton.Icon>
+                            <FontIcon Glyph="&#xE8EC;" />
+                        </AppBarButton.Icon>
+                    </AppBarButton>
+                </CommandBar>
+                <Button
+                    x:Name="RenameButton"
+                    Click="Rename_Click"
+                    Style="{StaticResource AccentButtonStyle}">
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <FontIcon FontSize="14" Glyph="&#xE8AC;" />
+                        <TextBlock Text="按顺序重命名" />
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </Grid>
+
+        <!--  Content layer  -->
+        <Grid
+            Grid.Row="1"
+            Margin="12,0,12,12"
+            Background="{ThemeResource LayerFillColorDefaultBrush}"
+            BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+            BorderThickness="1"
+            CornerRadius="8">
+            <GridView
+                x:Name="ImageGrid"
+                Padding="12,12,4,12"
+                AllowDrop="True"
+                CanDragItems="True"
+                CanReorderItems="True"
+                DoubleTapped="ImageGrid_DoubleTapped"
+                DragItemsCompleted="ImageGrid_DragItemsCompleted"
+                DragItemsStarting="ImageGrid_DragItemsStarting"
+                ItemsSource="{x:Bind Items}"
+                KeyDown="ImageGrid_KeyDown"
+                SelectionChanged="ImageGrid_SelectionChanged"
+                SelectionMode="Extended">
+                <GridView.ItemTemplate>
+                    <DataTemplate x:DataType="models:ImageItem">
+                        <Grid
+                            Width="160"
+                            Padding="6"
+                            Background="Transparent"
+                            ContextFlyout="{StaticResource ItemMenu}"
+                            RowSpacing="6"
+                            ToolTipService.ToolTip="{x:Bind FileName, Mode=OneWay}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="148" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Border Background="{ThemeResource ControlFillColorSecondaryBrush}" CornerRadius="4">
+                                <Image Source="{x:Bind Thumbnail, Mode=OneWay}" Stretch="Uniform" />
+                            </Border>
+                            <Border
+                                MinWidth="24"
+                                Margin="6"
+                                Padding="6,1"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                Background="{ThemeResource AcrylicInAppFillColorDefaultBrush}"
+                                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                                BorderThickness="1"
+                                CornerRadius="4">
+                                <TextBlock
+                                    HorizontalAlignment="Center"
+                                    Style="{StaticResource CaptionTextBlockStyle}"
+                                    Text="{x:Bind PositionText, Mode=OneWay}" />
+                            </Border>
+                            <TextBlock
+                                Grid.Row="1"
+                                HorizontalAlignment="Center"
+                                Style="{StaticResource CaptionTextBlockStyle}"
+                                Text="{x:Bind FileName, Mode=OneWay}"
+                                TextTrimming="CharacterEllipsis"
+                                TextWrapping="NoWrap" />
+                        </Grid>
+                    </DataTemplate>
+                </GridView.ItemTemplate>
+            </GridView>
+
+            <StackPanel
+                x:Name="EmptyState"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Spacing="12">
+                <FontIcon
+                    FontSize="48"
+                    Foreground="{ThemeResource TextFillColorTertiaryBrush}"
+                    Glyph="&#xE91B;" />
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    Style="{StaticResource BodyStrongTextBlockStyle}"
+                    Text="打开或拖入一个图片文件夹" />
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                    Style="{StaticResource CaptionTextBlockStyle}"
+                    Text="拖拽（可多选）调整顺序，再按新顺序批量重命名" />
+                <Button
+                    Margin="0,8,0,0"
+                    HorizontalAlignment="Center"
+                    Click="OpenFolder_Click"
+                    Content="打开文件夹"
+                    Style="{StaticResource AccentButtonStyle}" />
+            </StackPanel>
+
+            <ProgressBar
+                x:Name="BusyBar"
+                VerticalAlignment="Top"
+                IsIndeterminate="True"
+                Visibility="Collapsed" />
+        </Grid>
+
+        <InfoBar
+            x:Name="StatusBar"
+            Grid.Row="2"
+            Margin="12,0,12,12"
+            IsOpen="False" />
+
+        <!--  Single image preview  -->
+        <Grid
+            x:Name="PreviewOverlay"
+            Grid.RowSpan="3"
+            Background="{ThemeResource AcrylicInAppFillColorDefaultBrush}"
+            PointerWheelChanged="PreviewOverlay_PointerWheelChanged"
+            Tapped="PreviewOverlay_Tapped"
+            Visibility="Collapsed">
+            <Image
+                x:Name="PreviewImage"
+                Margin="80,16,80,72"
+                Stretch="Uniform" />
+            <Button
+                x:Name="PrevButton"
+                Margin="16,0"
+                HorizontalAlignment="Left"
+                Click="PrevButton_Click"
+                Style="{StaticResource RoundIconButtonStyle}"
+                ToolTipService.ToolTip="上一张 (←)">
+                <FontIcon FontSize="16" Glyph="&#xE76B;" />
+            </Button>
+            <Button
+                x:Name="NextButton"
+                Margin="16,0"
+                HorizontalAlignment="Right"
+                Click="NextButton_Click"
+                Style="{StaticResource RoundIconButtonStyle}"
+                ToolTipService.ToolTip="下一张 (→)">
+                <FontIcon FontSize="16" Glyph="&#xE76C;" />
+            </Button>
+            <Button
+                x:Name="ClosePreviewButton"
+                Margin="16"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Click="ClosePreview_Click"
+                Style="{StaticResource RoundIconButtonStyle}"
+                ToolTipService.ToolTip="关闭 (Esc)">
+                <FontIcon FontSize="14" Glyph="&#xE711;" />
+            </Button>
+            <Border
+                Margin="0,0,0,20"
+                Padding="14,6"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Bottom"
+                Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                BorderThickness="1"
+                CornerRadius="8">
+                <StackPanel Orientation="Horizontal" Spacing="12">
+                    <TextBlock
+                        x:Name="PreviewNameText"
+                        MaxWidth="480"
+                        TextTrimming="CharacterEllipsis" />
+                    <TextBlock x:Name="PreviewCounterText" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <!--  Rename dialog  -->
+        <ContentDialog
+            x:Name="RenameDialog"
+            Title="按当前顺序重命名"
+            CloseButtonText="取消"
+            DefaultButton="Primary"
+            PrimaryButtonText="重命名">
+            <StackPanel Width="380" Spacing="12">
+                <Grid ColumnSpacing="12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBox
+                        x:Name="PrefixBox"
+                        Header="前缀"
+                        PlaceholderText="例如 IMG_" />
+                    <TextBox
+                        x:Name="SuffixBox"
+                        Grid.Column="1"
+                        Header="后缀"
+                        PlaceholderText="可选" />
+                </Grid>
+                <Grid ColumnSpacing="12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <NumberBox
+                        x:Name="StartBox"
+                        Header="起始序号"
+                        Minimum="0"
+                        SpinButtonPlacementMode="Compact"
+                        Value="1" />
+                    <NumberBox
+                        x:Name="DigitsBox"
+                        Grid.Column="1"
+                        Header="序号位数"
+                        Maximum="10"
+                        Minimum="1"
+                        SpinButtonPlacementMode="Compact"
+                        Value="3" />
+                </Grid>
+                <CheckBox x:Name="StripOnRenameBox" Content="同时移除 EXIF 信息（不可撤销）" />
+                <StackPanel Spacing="4">
+                    <TextBlock
+                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                        Style="{StaticResource CaptionTextBlockStyle}"
+                        Text="预览" />
+                    <Border
+                        Padding="10,8"
+                        Background="{ThemeResource ControlFillColorSecondaryBrush}"
+                        CornerRadius="4">
+                        <TextBlock
+                            x:Name="RenamePreviewText"
+                            FontFamily="Consolas"
+                            FontSize="12"
+                            TextWrapping="Wrap" />
+                    </Border>
+                    <TextBlock
+                        x:Name="RenameErrorText"
+                        Foreground="{ThemeResource SystemFillColorCriticalBrush}"
+                        Style="{StaticResource CaptionTextBlockStyle}"
+                        TextWrapping="Wrap"
+                        Visibility="Collapsed" />
+                </StackPanel>
+            </StackPanel>
+        </ContentDialog>
+    </Grid>
+</Page>
