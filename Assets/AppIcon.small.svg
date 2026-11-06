@@ -1,0 +1,29 @@
+<!-- Simplified variant of AppIcon.svg for 16-24 px: no back card or shadows, larger badge. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4FC3F7" />
+      <stop offset="1" stop-color="#1E88E5" />
+    </linearGradient>
+    <linearGradient id="badge" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#9B7CFF" />
+      <stop offset="1" stop-color="#5B3FD9" />
+    </linearGradient>
+    <clipPath id="photo">
+      <rect x="16" y="40" width="192" height="156" rx="24" />
+    </clipPath>
+  </defs>
+
+  <g clip-path="url(#photo)">
+    <rect x="16" y="40" width="192" height="156" fill="url(#sky)" />
+    <circle cx="150" cy="86" r="20" fill="#FFC93C" />
+    <path d="M16 196 L16 150 L76 100 L132 150 L208 196 Z" fill="#22A06B" />
+  </g>
+
+  <circle cx="186" cy="186" r="70" fill="#FFFFFF" />
+  <circle cx="186" cy="186" r="60" fill="url(#badge)" />
+  <g fill="none" stroke="#FFFFFF" stroke-width="18" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M162 216 L162 156 M144 174 L162 156 L180 174" />
+    <path d="M210 156 L210 216 M192 198 L210 216 L228 198" />
+  </g>
+</svg>

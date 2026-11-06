@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <defs>
+    <linearGradient id="back" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#A9D6FF" />
+      <stop offset="1" stop-color="#6AAEF2" />
+    </linearGradient>
+    <linearGradient id="card" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF" />
+      <stop offset="1" stop-color="#E6EEF8" />
+    </linearGradient>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4FC3F7" />
+      <stop offset="1" stop-color="#1E88E5" />
+    </linearGradient>
+    <linearGradient id="hillFar" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7FD3B4" />
+      <stop offset="1" stop-color="#3FAE8C" />
+    </linearGradient>
+    <linearGradient id="hillNear" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2FB57E" />
+      <stop offset="1" stop-color="#14805A" />
+    </linearGradient>
+    <linearGradient id="sun" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFE27A" />
+      <stop offset="1" stop-color="#FFB938" />
+    </linearGradient>
+    <linearGradient id="badge" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#9B7CFF" />
+      <stop offset="1" stop-color="#5B3FD9" />
+    </linearGradient>
+    <clipPath id="photo">
+      <rect x="40" y="82" width="144" height="110" rx="12" />
+    </clipPath>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#0B2A55" flood-opacity="0.28" />
+    </filter>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0B2A55" flood-opacity="0.18" />
+    </filter>
+  </defs>
+
+  <!-- Card behind, tilted -->
+  <rect x="64" y="34" width="156" height="124" rx="20" fill="url(#back)"
+        transform="rotate(9 142 96)" filter="url(#softShadow)" />
+
+  <!-- Front photo card -->
+  <g filter="url(#shadow)">
+    <rect x="28" y="70" width="168" height="134" rx="22" fill="url(#card)" />
+  </g>
+  <g clip-path="url(#photo)">
+    <rect x="40" y="82" width="144" height="110" fill="url(#sky)" />
+    <circle cx="152" cy="114" r="13" fill="url(#sun)" />
+    <path d="M40 192 L40 160 L76 128 L108 156 L128 140 L184 182 L184 192 Z" fill="url(#hillFar)" />
+    <path d="M40 192 L40 176 L84 150 L132 192 Z" fill="url(#hillNear)" />
+  </g>
+
+  <!-- Reorder badge -->
+  <g filter="url(#shadow)">
+    <circle cx="196" cy="192" r="50" fill="#FFFFFF" />
+  </g>
+  <circle cx="196" cy="192" r="43" fill="url(#badge)" />
+  <g fill="none" stroke="#FFFFFF" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M181 212 L181 172 M169 185 L181 172 L193 185" />
+    <path d="M211 172 L211 212 M199 199 L211 212 L223 199" />
+  </g>
+</svg>
