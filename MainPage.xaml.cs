@@ -127,7 +127,7 @@ public sealed partial class MainPage : Page
     {
         if (_busy || _dragItems is not null || !e.DataView.Contains(StandardDataFormats.StorageItems)) return;
         e.AcceptedOperation = DataPackageOperation.Link;
-        e.DragUIOverride.Caption = "打开此文件夹";
+        e.DragUIOverride.Caption = Loc.Get("Drag_OpenFolder");
     }
 
     private async void Root_Drop(object sender, DragEventArgs e)
@@ -168,7 +168,7 @@ public sealed partial class MainPage : Page
         }
         catch (Exception ex)
         {
-            ShowStatus("无法读取文件夹", ex.Message, InfoBarSeverity.Error);
+            ShowStatus(Loc.Get("Status_CannotReadFolder"), ex.Message, InfoBarSeverity.Error);
             return;
         }
 
@@ -199,10 +199,10 @@ public sealed partial class MainPage : Page
         var dialog = new ContentDialog
         {
             XamlRoot = XamlRoot,
-            Title = "有未保存的更改",
-            Content = "当前的排序、暂存区和删除标记尚未保存，确定要放弃吗？",
-            PrimaryButtonText = "放弃更改",
-            CloseButtonText = "取消",
+            Title = Loc.Get("Discard_Title"),
+            Content = Loc.Get("Discard_Content"),
+            PrimaryButtonText = Loc.Get("Discard_Primary"),
+            CloseButtonText = Loc.Get("Common_Cancel"),
             DefaultButton = ContentDialogButton.Close,
         };
         try
@@ -449,7 +449,7 @@ public sealed partial class MainPage : Page
     {
         if (_busy) return;
         var sorted = Items.OrderBy(i => i.FileName, NaturalComparer.Instance).ToList();
-        Mutate("按文件名排序", () => Sync(Items, sorted));
+        Mutate(Loc.Get("Action_SortByName"), () => Sync(Items, sorted));
     }
 
     private void MoveToStart_Click(object sender, RoutedEventArgs e) => MoveToMain(GetContextTargets(), toStart: true);
@@ -459,7 +459,7 @@ public sealed partial class MainPage : Page
     private void MoveToMain(List<ImageItem> targets, bool toStart)
     {
         if (targets.Count == 0 || _busy) return;
-        Mutate(toStart ? "移到最前" : "移到最后", () => MoveItems(targets, Items, toStart ? 0 : int.MaxValue));
+        Mutate(Loc.Get(toStart ? "Action_MoveToStart" : "Action_MoveToEnd"), () => MoveItems(targets, Items, toStart ? 0 : int.MaxValue));
         ImageGrid.ScrollIntoView(targets[0]);
     }
 
@@ -482,7 +482,7 @@ public sealed partial class MainPage : Page
         _dragItems = null;
         _dragSnapshot = null;
         // Reorders within one grid are applied by the control itself; record them here.
-        if (before is not null) Commit("拖拽调整", before);
+        if (before is not null) Commit(Loc.Get("Action_Drag"), before);
     }
 
     /// <summary>True for an in-app drag coming from a different grid than <paramref name="target"/>.</summary>
@@ -494,8 +494,8 @@ public sealed partial class MainPage : Page
         if (!IsForeignItemDrag(sender)) return;
         e.AcceptedOperation = DataPackageOperation.Move;
         e.DragUIOverride.Caption = ReferenceEquals(sender, ImageGrid)
-            ? "放回列表"
-            : $"移到「{((sender as FrameworkElement)?.DataContext as StagingArea)?.Name}」";
+            ? Loc.Get("Drag_BackToList")
+            : Loc.Format("Drag_ToArea", ((sender as FrameworkElement)?.DataContext as StagingArea)?.Name);
         e.Handled = true;
     }
 
@@ -516,7 +516,7 @@ public sealed partial class MainPage : Page
         {
             _suppressCollectionEvents = false;
         }
-        Commit(ReferenceEquals(grid, ImageGrid) ? "放回列表" : "移到暂存区", before);
+        Commit(Loc.Get(ReferenceEquals(grid, ImageGrid) ? "Drag_BackToList" : "Action_MoveToStaging"), before);
         e.Handled = true;
     }
 
@@ -564,7 +564,7 @@ public sealed partial class MainPage : Page
     {
         if (_busy || _dragItems is null) return;
         e.AcceptedOperation = DataPackageOperation.Move;
-        e.DragUIOverride.Caption = "新建暂存区";
+        e.DragUIOverride.Caption = Loc.Get("Action_NewStaging");
         e.Handled = true;
     }
 
@@ -581,7 +581,7 @@ public sealed partial class MainPage : Page
         {
             _suppressCollectionEvents = false;
         }
-        Commit("新建暂存区", before);
+        Commit(Loc.Get("Action_NewStaging"), before);
         e.Handled = true;
     }
 
@@ -589,7 +589,7 @@ public sealed partial class MainPage : Page
 
     private StagingArea CreateArea()
     {
-        var area = new StagingArea($"暂存区 {++_stagingCounter}");
+        var area = new StagingArea(Loc.Format("Staging_DefaultName", ++_stagingCounter));
         area.Items.CollectionChanged += OnListChanged;
         StagingAreas.Add(area);
         return area;
@@ -598,26 +598,26 @@ public sealed partial class MainPage : Page
     private void AddStaging_Click(object sender, RoutedEventArgs e)
     {
         if (_busy) return;
-        Mutate("新建暂存区", () => CreateArea());
+        Mutate(Loc.Get("Action_NewStaging"), () => CreateArea());
     }
 
     private void MoveToStaging(List<ImageItem> targets, StagingArea? area)
     {
         if (targets.Count == 0 || _busy) return;
-        Mutate("移到暂存区", () => MoveItems(targets, (area ?? CreateArea()).Items, int.MaxValue));
+        Mutate(Loc.Get("Action_MoveToStaging"), () => MoveItems(targets, (area ?? CreateArea()).Items, int.MaxValue));
         ShowStagingPanel(true);
     }
 
     private void StagingRestoreAll_Click(object sender, RoutedEventArgs e)
     {
         if (_busy || (sender as FrameworkElement)?.Tag is not StagingArea area) return;
-        Mutate("全部放回", () => MoveItems(area.Items.ToList(), Items, int.MaxValue));
+        Mutate(Loc.Get("Action_RestoreAll"), () => MoveItems(area.Items.ToList(), Items, int.MaxValue));
     }
 
     private void StagingRemove_Click(object sender, RoutedEventArgs e)
     {
         if (_busy || (sender as FrameworkElement)?.Tag is not StagingArea area) return;
-        Mutate("移除暂存区", () =>
+        Mutate(Loc.Get("Action_RemoveStaging"), () =>
         {
             MoveItems(area.Items.ToList(), Items, int.MaxValue);
             StagingAreas.Remove(area);
@@ -645,7 +645,7 @@ public sealed partial class MainPage : Page
         {
             if (item is MenuFlyoutItem { Tag: "DeleteItem" } deleteItem)
             {
-                deleteItem.Text = targets.Count > 0 && targets.All(t => t.IsMarkedForDeletion) ? "取消删除标记" : "标记删除";
+                deleteItem.Text = targets.Count > 0 && targets.All(t => t.IsMarkedForDeletion) ? Loc.Get("Action_UnmarkDelete") : Loc.Get("Action_MarkDelete");
             }
             else if (item is MenuFlyoutSubItem staging)
             {
@@ -661,7 +661,7 @@ public sealed partial class MainPage : Page
                     staging.Items.Add(areaItem);
                 }
                 if (StagingAreas.Count > 0) staging.Items.Add(new MenuFlyoutSeparator());
-                var create = new MenuFlyoutItem { Text = "新建暂存区", Icon = new FontIcon { Glyph = "" } };
+                var create = new MenuFlyoutItem { Text = Loc.Get("Action_NewStaging"), Icon = new FontIcon { Glyph = "" } };
                 create.Click += (_, _) => MoveToStaging(targets, null);
                 staging.Items.Add(create);
             }
@@ -721,7 +721,7 @@ public sealed partial class MainPage : Page
     {
         if (targets.Count == 0 || _busy) return;
         bool mark = !targets.All(t => t.IsMarkedForDeletion);
-        Mutate(mark ? "标记删除" : "取消删除标记", () =>
+        Mutate(Loc.Get(mark ? "Action_MarkDelete" : "Action_UnmarkDelete"), () =>
         {
             foreach (var t in targets) t.IsMarkedForDeletion = mark;
         });
@@ -754,7 +754,7 @@ public sealed partial class MainPage : Page
         {
             case LayoutEntry layout:
                 ApplyLayout(undo ? layout.Before : layout.After);
-                ShowStatus(undo ? "已撤销" : "已重做", layout.Description, InfoBarSeverity.Informational);
+                ShowStatus(Loc.Get(undo ? "Status_Undone" : "Status_Redone"), layout.Description, InfoBarSeverity.Informational);
                 return true;
 
             case RenameEntry rename:
@@ -766,12 +766,12 @@ public sealed partial class MainPage : Page
                 {
                     await Task.Run(() => BatchRenamer.Rename(plan));
                     foreach (var c in rename.Changes) c.Item.Path = undo ? c.OldPath : c.NewPath;
-                    ShowStatus(undo ? "已撤销" : "已重做", $"{rename.Description}（{rename.Changes.Count} 个文件）", InfoBarSeverity.Informational);
+                    ShowStatus(Loc.Get(undo ? "Status_Undone" : "Status_Redone"), Loc.Format("Status_RenameUndoDetail", rename.Description, rename.Changes.Count), InfoBarSeverity.Informational);
                     return true;
                 }
                 catch (Exception ex)
                 {
-                    ShowStatus(undo ? "撤销失败" : "重做失败", ex.Message, InfoBarSeverity.Error);
+                    ShowStatus(Loc.Get(undo ? "Status_UndoFailed" : "Status_RedoFailed"), ex.Message, InfoBarSeverity.Error);
                     return false;
                 }
                 finally
@@ -819,7 +819,7 @@ public sealed partial class MainPage : Page
         var invalid = Path.GetInvalidFileNameChars();
         if (prefix.IndexOfAny(invalid) >= 0 || suffix.IndexOfAny(invalid) >= 0)
         {
-            error = "前缀或后缀包含文件名不允许的字符。";
+            error = Loc.Get("Error_InvalidAffix");
             return null;
         }
         if (_folder is null) return null;
@@ -842,7 +842,7 @@ public sealed partial class MainPage : Page
             var targets = plan.Select(p => p.Item2).ToHashSet(StringComparer.OrdinalIgnoreCase);
             if (StagedItems.FirstOrDefault(i => !i.IsMarkedForDeletion && targets.Contains(i.Path)) is { } clash)
             {
-                error = $"暂存区中的 {clash.FileName} 与新文件名冲突，请改为追加到末尾或调整前缀 / 起始序号。";
+                error = Loc.Format("Error_StagedClash", clash.FileName);
                 return null;
             }
         }
@@ -875,15 +875,15 @@ public sealed partial class MainPage : Page
                 for (int i = 0; i < head; i++) Line(plan[i]);
                 if (plan.Count > head + 1) sb.AppendLine("…");
                 if (plan.Count > head) Line(plan[^1]);
-                RenamePreviewText.Text = plan.Count == 0 ? "（没有要命名的图片）" : sb.ToString().TrimEnd();
+                RenamePreviewText.Text = plan.Count == 0 ? Loc.Get("Preview_NoImages") : sb.ToString().TrimEnd();
             }
         }
 
         int deleteCount = AllItems().Count(i => i.IsMarkedForDeletion);
         var lines = new List<string>();
-        if (deleteCount > 0) lines.Add($"将把 {deleteCount} 个标记删除的文件移到回收站（之后无法在本应用中撤销）。");
-        if (rename && error is null) lines.Add(renameCount > 0 ? $"将重命名 {renameCount} 个文件。" : "文件名均无需变化。");
-        if (!rename && !Items.SequenceEqual(_savedOrder)) lines.Add("不重命名时，当前排序与暂存区不会被保存。");
+        if (deleteCount > 0) lines.Add(Loc.Format("Summary_WillDelete", deleteCount));
+        if (rename && error is null) lines.Add(renameCount > 0 ? Loc.Format("Summary_WillRename", renameCount) : Loc.Get("Summary_NoRenameNeeded"));
+        if (!rename && !Items.SequenceEqual(_savedOrder)) lines.Add(Loc.Get("Summary_OrderNotSaved"));
         SaveSummaryText.Text = string.Join("\n", lines);
 
         RenameErrorText.Text = error ?? string.Empty;
@@ -902,7 +902,7 @@ public sealed partial class MainPage : Page
             plan = BuildRenamePlan(out string? error);
             if (plan is null)
             {
-                ShowStatus("无法保存", error ?? string.Empty, InfoBarSeverity.Error);
+                ShowStatus(Loc.Get("Status_CannotSave"), error ?? string.Empty, InfoBarSeverity.Error);
                 return;
             }
         }
@@ -910,7 +910,7 @@ public sealed partial class MainPage : Page
         var toDelete = AllItems().Where(i => i.IsMarkedForDeletion).ToList();
         if (plan is not null && FindDiskConflict(plan, toDelete) is { } conflict)
         {
-            ShowStatus("无法保存", $"目标文件已存在且不在列表中：{conflict}", InfoBarSeverity.Error);
+            ShowStatus(Loc.Get("Status_CannotSave"), Loc.Format("Error_TargetExists", conflict), InfoBarSeverity.Error);
             return;
         }
 
@@ -929,11 +929,11 @@ public sealed partial class MainPage : Page
                     _savedOrder = _savedOrder.Where(i => !gone.Contains(i)).ToList();
                     // Older layout entries still reference deleted files.
                     _history.Clear();
-                    messages.Add($"已将 {deleted.Count} 个文件移到回收站");
+                    messages.Add(Loc.Format("Msg_Deleted", deleted.Count));
                 }
                 if (failed > 0)
                 {
-                    ShowStatus("部分文件删除失败，未进行重命名", $"{failed} 个文件无法删除：{firstError}", InfoBarSeverity.Error);
+                    ShowStatus(Loc.Get("Status_DeleteFailed"), Loc.Format("Msg_DeleteFailedDetail", failed, firstError), InfoBarSeverity.Error);
                     return;
                 }
             }
@@ -942,7 +942,7 @@ public sealed partial class MainPage : Page
             {
                 if (AppendStaged && StagedItems.Any())
                 {
-                    Mutate("暂存区追加到末尾", () => MoveItems(StagedItems.ToList(), Items, int.MaxValue));
+                    Mutate(Loc.Get("Action_AppendStaged"), () => MoveItems(StagedItems.ToList(), Items, int.MaxValue));
                 }
 
                 var changes = plan
@@ -953,25 +953,25 @@ public sealed partial class MainPage : Page
                 {
                     await Task.Run(() => BatchRenamer.Rename(changes.Select(c => (c.OldPath, c.NewPath)).ToList()));
                     foreach (var c in changes) c.Item.Path = c.NewPath;
-                    _history.Push(new RenameEntry("保存重命名", changes));
+                    _history.Push(new RenameEntry(Loc.Get("Action_SaveRename"), changes));
                 }
                 _savedOrder = Items.ToList();
-                messages.Add(changes.Count > 0 ? $"已重命名 {changes.Count} 个文件" : "文件名均未变化");
+                messages.Add(changes.Count > 0 ? Loc.Format("Msg_Renamed", changes.Count) : Loc.Get("Msg_NoNameChanged"));
 
                 if (strip)
                 {
                     var summary = await StripCoreAsync(plan.Select(p => p.Item).ToList());
-                    messages.Add(summary.Message.TrimEnd('。'));
+                    messages.Add(summary.Message);
                     if (summary.Failed > 0) severity = InfoBarSeverity.Warning;
                 }
             }
 
-            ShowStatus("已保存", string.Join("；", messages) + "。", severity);
+            ShowStatus(Loc.Get("Status_Saved"), string.Join(" ", messages), severity);
         }
         catch (Exception ex)
         {
-            var prefix = messages.Count > 0 ? string.Join("；", messages) + "。" : string.Empty;
-            ShowStatus("重命名失败，已回滚", prefix + ex.Message, InfoBarSeverity.Error);
+            var prefix = messages.Count > 0 ? string.Join(" ", messages) + " " : string.Empty;
+            ShowStatus(Loc.Get("Status_RenameFailed"), prefix + ex.Message, InfoBarSeverity.Error);
         }
         finally
         {
@@ -1046,10 +1046,10 @@ public sealed partial class MainPage : Page
         var dialog = new ContentDialog
         {
             XamlRoot = XamlRoot,
-            Title = "移除 EXIF 信息",
-            Content = $"将移除 {targets.Count} 张图片中的 EXIF、XMP、GPS 等元数据（保留方向与色彩配置）。\n\n此操作会直接修改原文件，且无法撤销。",
-            PrimaryButtonText = "移除",
-            CloseButtonText = "取消",
+            Title = Loc.Get("Strip_Title"),
+            Content = Loc.Format("Strip_Content", targets.Count),
+            PrimaryButtonText = Loc.Get("Strip_Primary"),
+            CloseButtonText = Loc.Get("Common_Cancel"),
             DefaultButton = ContentDialogButton.Close,
         };
         if (await dialog.ShowAsync() != ContentDialogResult.Primary) return;
@@ -1058,7 +1058,7 @@ public sealed partial class MainPage : Page
         try
         {
             var summary = await StripCoreAsync(targets);
-            ShowStatus("移除 EXIF 完成", summary.Message, summary.Failed > 0 ? InfoBarSeverity.Warning : InfoBarSeverity.Success);
+            ShowStatus(Loc.Get("Status_StripDone"), summary.Message, summary.Failed > 0 ? InfoBarSeverity.Warning : InfoBarSeverity.Success);
         }
         finally
         {
@@ -1072,11 +1072,11 @@ public sealed partial class MainPage : Page
         {
             get
             {
-                var parts = new List<string> { $"已清理 {Stripped} 张" };
-                if (Clean > 0) parts.Add($"{Clean} 张无需处理");
-                if (Unsupported > 0) parts.Add($"{Unsupported} 张格式不支持（仅支持 JPEG / PNG / WebP）");
-                if (Failed > 0) parts.Add($"{Failed} 张失败：{FirstError}");
-                return string.Join("，", parts) + "。";
+                var parts = new List<string> { Loc.Format("Strip_Cleaned", Stripped) };
+                if (Clean > 0) parts.Add(Loc.Format("Strip_AlreadyClean", Clean));
+                if (Unsupported > 0) parts.Add(Loc.Format("Strip_Unsupported", Unsupported));
+                if (Failed > 0) parts.Add(Loc.Format("Strip_Failed", Failed, FirstError));
+                return Loc.Format("Strip_Sentence", string.Join(Loc.Get("ListSeparator"), parts));
             }
         }
     }
@@ -1171,7 +1171,7 @@ public sealed partial class MainPage : Page
         int version = ++_previewVersion;
         var item = list[index];
 
-        PreviewNameText.Text = item.IsMarkedForDeletion ? $"{item.FileName}（待删除）" : item.FileName;
+        PreviewNameText.Text = item.IsMarkedForDeletion ? Loc.Format("Preview_PendingDelete", item.FileName) : item.FileName;
         PreviewCounterText.Text = $"{index + 1} / {list.Count}";
         PrevButton.IsEnabled = index > 0;
         NextButton.IsEnabled = index < list.Count - 1;
@@ -1282,21 +1282,21 @@ public sealed partial class MainPage : Page
         AddStagingButton.IsEnabled = !_busy && _folder is not null;
         UndoButton.IsEnabled = !_busy && _history.CanUndo;
         RedoButton.IsEnabled = !_busy && _history.CanRedo;
-        ToolTipService.SetToolTip(UndoButton, _history.NextUndo is { } u ? $"撤销：{u.Description} (Ctrl+Z)" : "撤销 (Ctrl+Z)");
-        ToolTipService.SetToolTip(RedoButton, _history.NextRedo is { } r ? $"重做：{r.Description} (Ctrl+Y)" : "重做 (Ctrl+Y)");
+        ToolTipService.SetToolTip(UndoButton, _history.NextUndo is { } u ? Loc.Format("Tooltip_UndoAction", u.Description) : Loc.Get("Tooltip_Undo"));
+        ToolTipService.SetToolTip(RedoButton, _history.NextRedo is { } r ? Loc.Format("Tooltip_RedoAction", r.Description) : Loc.Get("Tooltip_Redo"));
 
         if (_folder is null)
         {
-            SummaryText.Text = "打开一个包含图片的文件夹开始";
+            SummaryText.Text = Loc.Get("Summary_NoFolder");
             return;
         }
-        var parts = new List<string> { $"列表 {Items.Count} 张" };
-        if (stagedCount > 0) parts.Add($"暂存 {stagedCount} 张");
+        var parts = new List<string> { Loc.Format("Summary_ListCount", Items.Count) };
+        if (stagedCount > 0) parts.Add(Loc.Format("Summary_Staged", stagedCount));
         int deleted = AllItems().Count(i => i.IsMarkedForDeletion);
-        if (deleted > 0) parts.Add($"待删除 {deleted} 张");
+        if (deleted > 0) parts.Add(Loc.Format("Summary_PendingDelete", deleted));
         int selected = ImageGrid.SelectedItems.Count;
-        if (selected > 0) parts.Add($"已选 {selected} 张");
-        parts.Add(HasPendingChanges ? "有未保存的更改" : "拖拽调整顺序");
+        if (selected > 0) parts.Add(Loc.Format("Summary_Selected", selected));
+        parts.Add(Loc.Get(HasPendingChanges ? "Summary_Unsaved" : "Summary_DragHint"));
         SummaryText.Text = string.Join(" · ", parts);
     }
 

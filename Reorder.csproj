@@ -13,6 +13,7 @@
     <EnableMsixTooling>true</EnableMsixTooling>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <DefaultLanguage>en-US</DefaultLanguage>
     <!--
       Lets the CsWinRT source generator emit the (unsafe) interop code for generic collections
       such as ObservableCollection<T> bound to ItemsSource. Without it the generator silently

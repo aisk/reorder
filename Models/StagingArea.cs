@@ -2,6 +2,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Microsoft.UI.Xaml;
+using Reorder.Services;
 
 namespace Reorder.Models;
 
@@ -37,7 +38,7 @@ public sealed partial class StagingArea : INotifyPropertyChanged
 
     public ObservableCollection<ImageItem> Items { get; } = [];
 
-    public string CountText => $"{Items.Count} 张";
+    public string CountText => Loc.Format("Staging_Count", Items.Count);
 
     public Visibility EmptyVisibility => Items.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
 

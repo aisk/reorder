@@ -13,9 +13,9 @@ public static class BatchRenamer
         foreach (var (_, target) in plan)
         {
             if (!targets.Add(target))
-                throw new InvalidOperationException($"目标文件名重复：{Path.GetFileName(target)}");
+                throw new InvalidOperationException(Loc.Format("Error_DuplicateTarget", Path.GetFileName(target)));
             if (File.Exists(target) && !sources.Contains(target))
-                throw new IOException($"目标文件已存在且不在列表中：{Path.GetFileName(target)}");
+                throw new IOException(Loc.Format("Error_TargetExists", Path.GetFileName(target)));
         }
 
         // Ordinal comparison so that case-only changes are still applied.

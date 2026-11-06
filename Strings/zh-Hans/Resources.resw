@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AppTitle" xml:space="preserve">
+    <value>Reorder · 图片排序重命名</value>
+  </data>
+  <data name="AppTitleBar.Title" xml:space="preserve">
+    <value>Reorder · 图片排序重命名</value>
+  </data>
+  <data name="MenuPreview.Text" xml:space="preserve">
+    <value>预览</value>
+  </data>
+  <data name="MenuMoveToStart.Text" xml:space="preserve">
+    <value>移到最前</value>
+  </data>
+  <data name="MenuMoveToEnd.Text" xml:space="preserve">
+    <value>移到最后</value>
+  </data>
+  <data name="MenuMoveToStaging.Text" xml:space="preserve">
+    <value>移到暂存区</value>
+  </data>
+  <data name="MenuDelete.Text" xml:space="preserve">
+    <value>标记删除</value>
+  </data>
+  <data name="MenuStripExif.Text" xml:space="preserve">
+    <value>移除 EXIF</value>
+  </data>
+  <data name="FolderNameText.Text" xml:space="preserve">
+    <value>未打开文件夹</value>
+  </data>
+  <data name="ZoomPanel.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>缩略图大小 (Ctrl+滚轮 / Ctrl+加号 / Ctrl+减号 / Ctrl+0)</value>
+  </data>
+  <data name="OpenButton.Label" xml:space="preserve">
+    <value>打开</value>
+  </data>
+  <data name="OpenButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>打开文件夹 (Ctrl+O)</value>
+  </data>
+  <data name="UndoButton.Label" xml:space="preserve">
+    <value>撤销</value>
+  </data>
+  <data name="RedoButton.Label" xml:space="preserve">
+    <value>重做</value>
+  </data>
+  <data name="SortButton.Label" xml:space="preserve">
+    <value>按文件名排序</value>
+  </data>
+  <data name="PreviewButton.Label" xml:space="preserve">
+    <value>预览</value>
+  </data>
+  <data name="PreviewButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>预览 (Enter / 双击)</value>
+  </data>
+  <data name="DeleteButton.Label" xml:space="preserve">
+    <value>标记删除</value>
+  </data>
+  <data name="DeleteButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>标记 / 取消标记删除所选图片 (Delete)，保存时移到回收站</value>
+  </data>
+  <data name="StripButton.Label" xml:space="preserve">
+    <value>移除 EXIF</value>
+  </data>
+  <data name="StripButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>移除所选图片（未选择时为全部）的 EXIF 等元数据</value>
+  </data>
+  <data name="StagingToggle.Label" xml:space="preserve">
+    <value>暂存区</value>
+  </data>
+  <data name="StagingToggle.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>显示 / 隐藏暂存区</value>
+  </data>
+  <data name="SaveButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>应用排序、重命名与删除 (Ctrl+S)</value>
+  </data>
+  <data name="SaveButtonText.Text" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="EmptyTitle.Text" xml:space="preserve">
+    <value>打开或拖入一个图片文件夹</value>
+  </data>
+  <data name="EmptyHint.Text" xml:space="preserve">
+    <value>拖拽调整顺序、放入暂存区、标记删除，最后一次性保存</value>
+  </data>
+  <data name="EmptyOpenButton.Content" xml:space="preserve">
+    <value>打开文件夹</value>
+  </data>
+  <data name="StagingTitle.Text" xml:space="preserve">
+    <value>暂存区</value>
+  </data>
+  <data name="AddStagingButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>新建暂存区</value>
+  </data>
+  <data name="StagingNameBox.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>点击修改名称</value>
+  </data>
+  <data name="StagingRestoreAll.Text" xml:space="preserve">
+    <value>全部放回列表末尾</value>
+  </data>
+  <data name="StagingRemove.Text" xml:space="preserve">
+    <value>移除暂存区（图片放回末尾）</value>
+  </data>
+  <data name="StagingEmptyText.Text" xml:space="preserve">
+    <value>拖入图片</value>
+  </data>
+  <data name="NewStagingDropText.Text" xml:space="preserve">
+    <value>拖到这里新建暂存区</value>
+  </data>
+  <data name="Staging_DefaultName" xml:space="preserve">
+    <value>暂存区 {0}</value>
+  </data>
+  <data name="Staging_Count" xml:space="preserve">
+    <value>{0} 张</value>
+  </data>
+  <data name="PrevButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>上一张 (←)</value>
+  </data>
+  <data name="NextButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>下一张 (→)</value>
+  </data>
+  <data name="ClosePreviewButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>关闭 (Esc)</value>
+  </data>
+  <data name="Preview_PendingDelete" xml:space="preserve">
+    <value>{0}（待删除）</value>
+  </data>
+  <data name="SaveDialog.Title" xml:space="preserve">
+    <value>保存更改</value>
+  </data>
+  <data name="SaveDialog.PrimaryButtonText" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="SaveDialog.CloseButtonText" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="RenameOnSaveBox.Content" xml:space="preserve">
+    <value>按当前顺序重命名</value>
+  </data>
+  <data name="PrefixBox.Header" xml:space="preserve">
+    <value>前缀</value>
+  </data>
+  <data name="PrefixBox.PlaceholderText" xml:space="preserve">
+    <value>例如 IMG_</value>
+  </data>
+  <data name="SuffixBox.Header" xml:space="preserve">
+    <value>后缀</value>
+  </data>
+  <data name="SuffixBox.PlaceholderText" xml:space="preserve">
+    <value>可选</value>
+  </data>
+  <data name="StartBox.Header" xml:space="preserve">
+    <value>起始序号</value>
+  </data>
+  <data name="DigitsBox.Header" xml:space="preserve">
+    <value>序号位数</value>
+  </data>
+  <data name="StagingModeBox.Header" xml:space="preserve">
+    <value>暂存区中的图片</value>
+  </data>
+  <data name="StagingModeAppend.Content" xml:space="preserve">
+    <value>按暂存区顺序追加到末尾</value>
+  </data>
+  <data name="StagingModeKeep.Content" xml:space="preserve">
+    <value>保持原文件名不动</value>
+  </data>
+  <data name="StripOnRenameBox.Content" xml:space="preserve">
+    <value>同时移除 EXIF 信息（不可撤销）</value>
+  </data>
+  <data name="RenamePreviewLabel.Text" xml:space="preserve">
+    <value>预览</value>
+  </data>
+  <data name="Preview_NoImages" xml:space="preserve">
+    <value>（没有要命名的图片）</value>
+  </data>
+  <data name="Summary_WillDelete" xml:space="preserve">
+    <value>将把 {0} 个标记删除的文件移到回收站（之后无法在本应用中撤销）。</value>
+  </data>
+  <data name="Summary_WillRename" xml:space="preserve">
+    <value>将重命名 {0} 个文件。</value>
+  </data>
+  <data name="Summary_NoRenameNeeded" xml:space="preserve">
+    <value>文件名均无需变化。</value>
+  </data>
+  <data name="Summary_OrderNotSaved" xml:space="preserve">
+    <value>不重命名时，当前排序与暂存区不会被保存。</value>
+  </data>
+  <data name="Error_InvalidAffix" xml:space="preserve">
+    <value>前缀或后缀包含文件名不允许的字符。</value>
+  </data>
+  <data name="Error_StagedClash" xml:space="preserve">
+    <value>暂存区中的 {0} 与新文件名冲突，请改为追加到末尾或调整前缀 / 起始序号。</value>
+  </data>
+  <data name="Status_CannotSave" xml:space="preserve">
+    <value>无法保存</value>
+  </data>
+  <data name="Error_TargetExists" xml:space="preserve">
+    <value>目标文件已存在且不在列表中：{0}</value>
+  </data>
+  <data name="Error_DuplicateTarget" xml:space="preserve">
+    <value>目标文件名重复：{0}</value>
+  </data>
+  <data name="Msg_Deleted" xml:space="preserve">
+    <value>已将 {0} 个文件移到回收站。</value>
+  </data>
+  <data name="Status_DeleteFailed" xml:space="preserve">
+    <value>部分文件删除失败，未进行重命名</value>
+  </data>
+  <data name="Msg_DeleteFailedDetail" xml:space="preserve">
+    <value>{0} 个文件无法删除：{1}</value>
+  </data>
+  <data name="Msg_Renamed" xml:space="preserve">
+    <value>已重命名 {0} 个文件。</value>
+  </data>
+  <data name="Msg_NoNameChanged" xml:space="preserve">
+    <value>文件名均未变化。</value>
+  </data>
+  <data name="Status_Saved" xml:space="preserve">
+    <value>已保存</value>
+  </data>
+  <data name="Status_RenameFailed" xml:space="preserve">
+    <value>重命名失败，已回滚</value>
+  </data>
+  <data name="Action_SortByName" xml:space="preserve">
+    <value>按文件名排序</value>
+  </data>
+  <data name="Action_MoveToStart" xml:space="preserve">
+    <value>移到最前</value>
+  </data>
+  <data name="Action_MoveToEnd" xml:space="preserve">
+    <value>移到最后</value>
+  </data>
+  <data name="Action_Drag" xml:space="preserve">
+    <value>拖拽调整</value>
+  </data>
+  <data name="Action_MoveToStaging" xml:space="preserve">
+    <value>移到暂存区</value>
+  </data>
+  <data name="Action_NewStaging" xml:space="preserve">
+    <value>新建暂存区</value>
+  </data>
+  <data name="Action_RestoreAll" xml:space="preserve">
+    <value>全部放回</value>
+  </data>
+  <data name="Action_RemoveStaging" xml:space="preserve">
+    <value>移除暂存区</value>
+  </data>
+  <data name="Action_MarkDelete" xml:space="preserve">
+    <value>标记删除</value>
+  </data>
+  <data name="Action_UnmarkDelete" xml:space="preserve">
+    <value>取消删除标记</value>
+  </data>
+  <data name="Action_AppendStaged" xml:space="preserve">
+    <value>暂存区追加到末尾</value>
+  </data>
+  <data name="Action_SaveRename" xml:space="preserve">
+    <value>保存重命名</value>
+  </data>
+  <data name="Drag_OpenFolder" xml:space="preserve">
+    <value>打开此文件夹</value>
+  </data>
+  <data name="Drag_BackToList" xml:space="preserve">
+    <value>放回列表</value>
+  </data>
+  <data name="Drag_ToArea" xml:space="preserve">
+    <value>移到「{0}」</value>
+  </data>
+  <data name="Status_Undone" xml:space="preserve">
+    <value>已撤销</value>
+  </data>
+  <data name="Status_Redone" xml:space="preserve">
+    <value>已重做</value>
+  </data>
+  <data name="Status_UndoFailed" xml:space="preserve">
+    <value>撤销失败</value>
+  </data>
+  <data name="Status_RedoFailed" xml:space="preserve">
+    <value>重做失败</value>
+  </data>
+  <data name="Status_RenameUndoDetail" xml:space="preserve">
+    <value>{0}（{1} 个文件）</value>
+  </data>
+  <data name="Tooltip_Undo" xml:space="preserve">
+    <value>撤销 (Ctrl+Z)</value>
+  </data>
+  <data name="Tooltip_UndoAction" xml:space="preserve">
+    <value>撤销：{0} (Ctrl+Z)</value>
+  </data>
+  <data name="Tooltip_Redo" xml:space="preserve">
+    <value>重做 (Ctrl+Y)</value>
+  </data>
+  <data name="Tooltip_RedoAction" xml:space="preserve">
+    <value>重做：{0} (Ctrl+Y)</value>
+  </data>
+  <data name="Status_CannotReadFolder" xml:space="preserve">
+    <value>无法读取文件夹</value>
+  </data>
+  <data name="Discard_Title" xml:space="preserve">
+    <value>有未保存的更改</value>
+  </data>
+  <data name="Discard_Content" xml:space="preserve">
+    <value>当前的排序、暂存区和删除标记尚未保存，确定要放弃吗？</value>
+  </data>
+  <data name="Discard_Primary" xml:space="preserve">
+    <value>放弃更改</value>
+  </data>
+  <data name="Common_Cancel" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="Summary_NoFolder" xml:space="preserve">
+    <value>打开一个包含图片的文件夹开始</value>
+  </data>
+  <data name="Summary_ListCount" xml:space="preserve">
+    <value>列表 {0} 张</value>
+  </data>
+  <data name="Summary_Staged" xml:space="preserve">
+    <value>暂存 {0} 张</value>
+  </data>
+  <data name="Summary_PendingDelete" xml:space="preserve">
+    <value>待删除 {0} 张</value>
+  </data>
+  <data name="Summary_Selected" xml:space="preserve">
+    <value>已选 {0} 张</value>
+  </data>
+  <data name="Summary_Unsaved" xml:space="preserve">
+    <value>有未保存的更改</value>
+  </data>
+  <data name="Summary_DragHint" xml:space="preserve">
+    <value>拖拽调整顺序</value>
+  </data>
+  <data name="Strip_Title" xml:space="preserve">
+    <value>移除 EXIF 信息</value>
+  </data>
+  <data name="Strip_Content" xml:space="preserve">
+    <value>将移除 {0} 张图片中的 EXIF、XMP、GPS 等元数据（保留方向与色彩配置）。
+
+此操作会直接修改原文件，且无法撤销。</value>
+  </data>
+  <data name="Strip_Primary" xml:space="preserve">
+    <value>移除</value>
+  </data>
+  <data name="Status_StripDone" xml:space="preserve">
+    <value>移除 EXIF 完成</value>
+  </data>
+  <data name="Strip_Cleaned" xml:space="preserve">
+    <value>已清理 {0} 张</value>
+  </data>
+  <data name="Strip_AlreadyClean" xml:space="preserve">
+    <value>{0} 张无需处理</value>
+  </data>
+  <data name="Strip_Unsupported" xml:space="preserve">
+    <value>{0} 张格式不支持（仅支持 JPEG / PNG / WebP）</value>
+  </data>
+  <data name="Strip_Failed" xml:space="preserve">
+    <value>{0} 张失败：{1}</value>
+  </data>
+  <data name="Strip_Sentence" xml:space="preserve">
+    <value>{0}。</value>
+  </data>
+  <data name="ListSeparator" xml:space="preserve">
+    <value>，</value>
+  </data>
+  <data name="Error_InvalidFile" xml:space="preserve">
+    <value>不是有效的 {0} 文件。</value>
+  </data>
+  <data name="Error_CorruptFile" xml:space="preserve">
+    <value>{0} 结构损坏。</value>
+  </data>
+  <data name="Error_JpegNoData" xml:space="preserve">
+    <value>JPEG 中没有图像数据。</value>
+  </data>
+</root>

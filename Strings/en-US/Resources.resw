@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AppTitle" xml:space="preserve">
+    <value>Reorder · Reorder and rename images</value>
+  </data>
+  <data name="AppTitleBar.Title" xml:space="preserve">
+    <value>Reorder · Reorder and rename images</value>
+  </data>
+  <data name="MenuPreview.Text" xml:space="preserve">
+    <value>Preview</value>
+  </data>
+  <data name="MenuMoveToStart.Text" xml:space="preserve">
+    <value>Move to start</value>
+  </data>
+  <data name="MenuMoveToEnd.Text" xml:space="preserve">
+    <value>Move to end</value>
+  </data>
+  <data name="MenuMoveToStaging.Text" xml:space="preserve">
+    <value>Move to staging area</value>
+  </data>
+  <data name="MenuDelete.Text" xml:space="preserve">
+    <value>Mark for deletion</value>
+  </data>
+  <data name="MenuStripExif.Text" xml:space="preserve">
+    <value>Remove EXIF</value>
+  </data>
+  <data name="FolderNameText.Text" xml:space="preserve">
+    <value>No folder opened</value>
+  </data>
+  <data name="ZoomPanel.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>Thumbnail size (Ctrl+Wheel / Ctrl+Plus / Ctrl+Minus / Ctrl+0)</value>
+  </data>
+  <data name="OpenButton.Label" xml:space="preserve">
+    <value>Open</value>
+  </data>
+  <data name="OpenButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>Open folder (Ctrl+O)</value>
+  </data>
+  <data name="UndoButton.Label" xml:space="preserve">
+    <value>Undo</value>
+  </data>
+  <data name="RedoButton.Label" xml:space="preserve">
+    <value>Redo</value>
+  </data>
+  <data name="SortButton.Label" xml:space="preserve">
+    <value>Sort by name</value>
+  </data>
+  <data name="PreviewButton.Label" xml:space="preserve">
+    <value>Preview</value>
+  </data>
+  <data name="PreviewButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>Preview (Enter / double-click)</value>
+  </data>
+  <data name="DeleteButton.Label" xml:space="preserve">
+    <value>Mark for deletion</value>
+  </data>
+  <data name="DeleteButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>Mark or unmark the selected images for deletion (Delete). They are moved to the Recycle Bin on save.</value>
+  </data>
+  <data name="StripButton.Label" xml:space="preserve">
+    <value>Remove EXIF</value>
+  </data>
+  <data name="StripButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>Remove EXIF and other metadata from the selected images (all images if none are selected)</value>
+  </data>
+  <data name="StagingToggle.Label" xml:space="preserve">
+    <value>Staging</value>
+  </data>
+  <data name="StagingToggle.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>Show / hide staging areas</value>
+  </data>
+  <data name="SaveButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>Apply order, renames and deletions (Ctrl+S)</value>
+  </data>
+  <data name="SaveButtonText.Text" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="EmptyTitle.Text" xml:space="preserve">
+    <value>Open or drop a folder of images</value>
+  </data>
+  <data name="EmptyHint.Text" xml:space="preserve">
+    <value>Drag to reorder, move images to staging areas, mark them for deletion, then save everything at once</value>
+  </data>
+  <data name="EmptyOpenButton.Content" xml:space="preserve">
+    <value>Open folder</value>
+  </data>
+  <data name="StagingTitle.Text" xml:space="preserve">
+    <value>Staging areas</value>
+  </data>
+  <data name="AddStagingButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>New staging area</value>
+  </data>
+  <data name="StagingNameBox.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>Click to rename</value>
+  </data>
+  <data name="StagingRestoreAll.Text" xml:space="preserve">
+    <value>Move all back to the end of the list</value>
+  </data>
+  <data name="StagingRemove.Text" xml:space="preserve">
+    <value>Remove staging area (images go back to the end)</value>
+  </data>
+  <data name="StagingEmptyText.Text" xml:space="preserve">
+    <value>Drop images here</value>
+  </data>
+  <data name="NewStagingDropText.Text" xml:space="preserve">
+    <value>Drop here to create a staging area</value>
+  </data>
+  <data name="Staging_DefaultName" xml:space="preserve">
+    <value>Staging {0}</value>
+  </data>
+  <data name="Staging_Count" xml:space="preserve">
+    <value>{0}</value>
+  </data>
+  <data name="PrevButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>Previous (←)</value>
+  </data>
+  <data name="NextButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>Next (→)</value>
+  </data>
+  <data name="ClosePreviewButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>Close (Esc)</value>
+  </data>
+  <data name="Preview_PendingDelete" xml:space="preserve">
+    <value>{0} (pending deletion)</value>
+  </data>
+  <data name="SaveDialog.Title" xml:space="preserve">
+    <value>Save changes</value>
+  </data>
+  <data name="SaveDialog.PrimaryButtonText" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="SaveDialog.CloseButtonText" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="RenameOnSaveBox.Content" xml:space="preserve">
+    <value>Rename in current order</value>
+  </data>
+  <data name="PrefixBox.Header" xml:space="preserve">
+    <value>Prefix</value>
+  </data>
+  <data name="PrefixBox.PlaceholderText" xml:space="preserve">
+    <value>e.g. IMG_</value>
+  </data>
+  <data name="SuffixBox.Header" xml:space="preserve">
+    <value>Suffix</value>
+  </data>
+  <data name="SuffixBox.PlaceholderText" xml:space="preserve">
+    <value>Optional</value>
+  </data>
+  <data name="StartBox.Header" xml:space="preserve">
+    <value>Start number</value>
+  </data>
+  <data name="DigitsBox.Header" xml:space="preserve">
+    <value>Digits</value>
+  </data>
+  <data name="StagingModeBox.Header" xml:space="preserve">
+    <value>Images in staging areas</value>
+  </data>
+  <data name="StagingModeAppend.Content" xml:space="preserve">
+    <value>Append to the end in staging order</value>
+  </data>
+  <data name="StagingModeKeep.Content" xml:space="preserve">
+    <value>Keep original file names</value>
+  </data>
+  <data name="StripOnRenameBox.Content" xml:space="preserve">
+    <value>Also remove EXIF data (cannot be undone)</value>
+  </data>
+  <data name="RenamePreviewLabel.Text" xml:space="preserve">
+    <value>Preview</value>
+  </data>
+  <data name="Preview_NoImages" xml:space="preserve">
+    <value>(No images to name)</value>
+  </data>
+  <data name="Summary_WillDelete" xml:space="preserve">
+    <value>{0} file(s) marked for deletion will be moved to the Recycle Bin (this can't be undone in this app).</value>
+  </data>
+  <data name="Summary_WillRename" xml:space="preserve">
+    <value>{0} file(s) will be renamed.</value>
+  </data>
+  <data name="Summary_NoRenameNeeded" xml:space="preserve">
+    <value>No file names need to change.</value>
+  </data>
+  <data name="Summary_OrderNotSaved" xml:space="preserve">
+    <value>Without renaming, the current order and staging areas won't be saved.</value>
+  </data>
+  <data name="Error_InvalidAffix" xml:space="preserve">
+    <value>The prefix or suffix contains characters that aren't allowed in file names.</value>
+  </data>
+  <data name="Error_StagedClash" xml:space="preserve">
+    <value>{0} in a staging area conflicts with a new file name. Append staged images to the end, or change the prefix / start number.</value>
+  </data>
+  <data name="Status_CannotSave" xml:space="preserve">
+    <value>Can't save</value>
+  </data>
+  <data name="Error_TargetExists" xml:space="preserve">
+    <value>Target file already exists and isn't in the list: {0}</value>
+  </data>
+  <data name="Error_DuplicateTarget" xml:space="preserve">
+    <value>Duplicate target file name: {0}</value>
+  </data>
+  <data name="Msg_Deleted" xml:space="preserve">
+    <value>Moved {0} file(s) to the Recycle Bin.</value>
+  </data>
+  <data name="Status_DeleteFailed" xml:space="preserve">
+    <value>Some files couldn't be deleted; nothing was renamed</value>
+  </data>
+  <data name="Msg_DeleteFailedDetail" xml:space="preserve">
+    <value>{0} file(s) couldn't be deleted: {1}</value>
+  </data>
+  <data name="Msg_Renamed" xml:space="preserve">
+    <value>Renamed {0} file(s).</value>
+  </data>
+  <data name="Msg_NoNameChanged" xml:space="preserve">
+    <value>No file names changed.</value>
+  </data>
+  <data name="Status_Saved" xml:space="preserve">
+    <value>Saved</value>
+  </data>
+  <data name="Status_RenameFailed" xml:space="preserve">
+    <value>Rename failed; changes were rolled back</value>
+  </data>
+  <data name="Action_SortByName" xml:space="preserve">
+    <value>Sort by name</value>
+  </data>
+  <data name="Action_MoveToStart" xml:space="preserve">
+    <value>Move to start</value>
+  </data>
+  <data name="Action_MoveToEnd" xml:space="preserve">
+    <value>Move to end</value>
+  </data>
+  <data name="Action_Drag" xml:space="preserve">
+    <value>Drag</value>
+  </data>
+  <data name="Action_MoveToStaging" xml:space="preserve">
+    <value>Move to staging area</value>
+  </data>
+  <data name="Action_NewStaging" xml:space="preserve">
+    <value>New staging area</value>
+  </data>
+  <data name="Action_RestoreAll" xml:space="preserve">
+    <value>Move all back</value>
+  </data>
+  <data name="Action_RemoveStaging" xml:space="preserve">
+    <value>Remove staging area</value>
+  </data>
+  <data name="Action_MarkDelete" xml:space="preserve">
+    <value>Mark for deletion</value>
+  </data>
+  <data name="Action_UnmarkDelete" xml:space="preserve">
+    <value>Unmark deletion</value>
+  </data>
+  <data name="Action_AppendStaged" xml:space="preserve">
+    <value>Append staged images</value>
+  </data>
+  <data name="Action_SaveRename" xml:space="preserve">
+    <value>Rename on save</value>
+  </data>
+  <data name="Drag_OpenFolder" xml:space="preserve">
+    <value>Open this folder</value>
+  </data>
+  <data name="Drag_BackToList" xml:space="preserve">
+    <value>Move back to list</value>
+  </data>
+  <data name="Drag_ToArea" xml:space="preserve">
+    <value>Move to “{0}”</value>
+  </data>
+  <data name="Status_Undone" xml:space="preserve">
+    <value>Undone</value>
+  </data>
+  <data name="Status_Redone" xml:space="preserve">
+    <value>Redone</value>
+  </data>
+  <data name="Status_UndoFailed" xml:space="preserve">
+    <value>Undo failed</value>
+  </data>
+  <data name="Status_RedoFailed" xml:space="preserve">
+    <value>Redo failed</value>
+  </data>
+  <data name="Status_RenameUndoDetail" xml:space="preserve">
+    <value>{0} ({1} file(s))</value>
+  </data>
+  <data name="Tooltip_Undo" xml:space="preserve">
+    <value>Undo (Ctrl+Z)</value>
+  </data>
+  <data name="Tooltip_UndoAction" xml:space="preserve">
+    <value>Undo: {0} (Ctrl+Z)</value>
+  </data>
+  <data name="Tooltip_Redo" xml:space="preserve">
+    <value>Redo (Ctrl+Y)</value>
+  </data>
+  <data name="Tooltip_RedoAction" xml:space="preserve">
+    <value>Redo: {0} (Ctrl+Y)</value>
+  </data>
+  <data name="Status_CannotReadFolder" xml:space="preserve">
+    <value>Can't read folder</value>
+  </data>
+  <data name="Discard_Title" xml:space="preserve">
+    <value>Unsaved changes</value>
+  </data>
+  <data name="Discard_Content" xml:space="preserve">
+    <value>The current order, staging areas and deletion marks haven't been saved. Discard them?</value>
+  </data>
+  <data name="Discard_Primary" xml:space="preserve">
+    <value>Discard</value>
+  </data>
+  <data name="Common_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Summary_NoFolder" xml:space="preserve">
+    <value>Open a folder of images to get started</value>
+  </data>
+  <data name="Summary_ListCount" xml:space="preserve">
+    <value>{0} in list</value>
+  </data>
+  <data name="Summary_Staged" xml:space="preserve">
+    <value>{0} staged</value>
+  </data>
+  <data name="Summary_PendingDelete" xml:space="preserve">
+    <value>{0} to delete</value>
+  </data>
+  <data name="Summary_Selected" xml:space="preserve">
+    <value>{0} selected</value>
+  </data>
+  <data name="Summary_Unsaved" xml:space="preserve">
+    <value>Unsaved changes</value>
+  </data>
+  <data name="Summary_DragHint" xml:space="preserve">
+    <value>Drag to reorder</value>
+  </data>
+  <data name="Strip_Title" xml:space="preserve">
+    <value>Remove EXIF data</value>
+  </data>
+  <data name="Strip_Content" xml:space="preserve">
+    <value>This removes EXIF, XMP, GPS and other metadata from {0} image(s) (orientation and color profile are kept).
+
+The original files are modified directly and this can't be undone.</value>
+  </data>
+  <data name="Strip_Primary" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="Status_StripDone" xml:space="preserve">
+    <value>EXIF removal finished</value>
+  </data>
+  <data name="Strip_Cleaned" xml:space="preserve">
+    <value>Cleaned {0}</value>
+  </data>
+  <data name="Strip_AlreadyClean" xml:space="preserve">
+    <value>{0} already clean</value>
+  </data>
+  <data name="Strip_Unsupported" xml:space="preserve">
+    <value>{0} unsupported (only JPEG / PNG / WebP)</value>
+  </data>
+  <data name="Strip_Failed" xml:space="preserve">
+    <value>{0} failed: {1}</value>
+  </data>
+  <data name="Strip_Sentence" xml:space="preserve">
+    <value>{0}.</value>
+  </data>
+  <data name="ListSeparator" xml:space="preserve">
+    <value>, </value>
+  </data>
+  <data name="Error_InvalidFile" xml:space="preserve">
+    <value>Not a valid {0} file.</value>
+  </data>
+  <data name="Error_CorruptFile" xml:space="preserve">
+    <value>The {0} structure is corrupted.</value>
+  </data>
+  <data name="Error_JpegNoData" xml:space="preserve">
+    <value>The JPEG has no image data.</value>
+  </data>
+</root>

@@ -23,23 +23,23 @@
         </Style>
 
         <MenuFlyout x:Key="ItemMenu" Opening="ItemMenu_Opening">
-            <MenuFlyoutItem Text="预览" Click="MenuPreview_Click">
+            <MenuFlyoutItem x:Uid="MenuPreview" Click="MenuPreview_Click">
                 <MenuFlyoutItem.Icon>
                     <FontIcon Glyph="&#xE8A1;" />
                 </MenuFlyoutItem.Icon>
             </MenuFlyoutItem>
             <MenuFlyoutSeparator />
-            <MenuFlyoutItem Text="移到最前" Click="MoveToStart_Click">
+            <MenuFlyoutItem x:Uid="MenuMoveToStart" Click="MoveToStart_Click">
                 <MenuFlyoutItem.Icon>
                     <FontIcon Glyph="&#xE74A;" />
                 </MenuFlyoutItem.Icon>
             </MenuFlyoutItem>
-            <MenuFlyoutItem Text="移到最后" Click="MoveToEnd_Click">
+            <MenuFlyoutItem x:Uid="MenuMoveToEnd" Click="MoveToEnd_Click">
                 <MenuFlyoutItem.Icon>
                     <FontIcon Glyph="&#xE74B;" />
                 </MenuFlyoutItem.Icon>
             </MenuFlyoutItem>
-            <MenuFlyoutSubItem Text="移到暂存区" Tag="StagingMenu">
+            <MenuFlyoutSubItem x:Uid="MenuMoveToStaging" Tag="StagingMenu">
                 <MenuFlyoutSubItem.Icon>
                     <FontIcon Glyph="&#xE7B8;" />
                 </MenuFlyoutSubItem.Icon>
@@ -49,12 +49,12 @@
                 Click="MenuToggleDelete_Click"
                 KeyboardAcceleratorTextOverride="Delete"
                 Tag="DeleteItem"
-                Text="标记删除">
+                x:Uid="MenuDelete">
                 <MenuFlyoutItem.Icon>
                     <FontIcon Glyph="&#xE74D;" />
                 </MenuFlyoutItem.Icon>
             </MenuFlyoutItem>
-            <MenuFlyoutItem Text="移除 EXIF" Click="MenuStripExif_Click">
+            <MenuFlyoutItem x:Uid="MenuStripExif" Click="MenuStripExif_Click">
                 <MenuFlyoutItem.Icon>
                     <FontIcon Glyph="&#xE8EC;" />
                 </MenuFlyoutItem.Icon>
@@ -79,13 +79,12 @@
                 <TextBlock
                     x:Name="FolderNameText"
                     Style="{StaticResource SubtitleTextBlockStyle}"
-                    Text="未打开文件夹"
+                    x:Uid="FolderNameText"
                     TextTrimming="CharacterEllipsis" />
                 <TextBlock
                     x:Name="SummaryText"
                     Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                     Style="{StaticResource CaptionTextBlockStyle}"
-                    Text="打开一个包含图片的文件夹开始"
                     TextTrimming="CharacterEllipsis"
                     TextWrapping="NoWrap" />
             </StackPanel>
@@ -99,7 +98,7 @@
                     VerticalAlignment="Center"
                     Orientation="Horizontal"
                     Spacing="6"
-                    ToolTipService.ToolTip="缩略图大小 (Ctrl+滚轮 / Ctrl+加号 / Ctrl+减号 / Ctrl+0)">
+                    x:Uid="ZoomPanel">
                     <FontIcon
                         FontSize="14"
                         Foreground="{ThemeResource TextFillColorSecondaryBrush}"
@@ -126,8 +125,7 @@
                     <AppBarButton
                         x:Name="OpenButton"
                         Click="OpenFolder_Click"
-                        Label="打开"
-                        ToolTipService.ToolTip="打开文件夹 (Ctrl+O)">
+                        x:Uid="OpenButton">
                         <AppBarButton.Icon>
                             <FontIcon Glyph="&#xE838;" />
                         </AppBarButton.Icon>
@@ -139,9 +137,8 @@
                     <AppBarButton
                         x:Name="UndoButton"
                         Click="Undo_Click"
-                        Label="撤销"
-                        LabelPosition="Collapsed"
-                        ToolTipService.ToolTip="撤销 (Ctrl+Z)">
+                        x:Uid="UndoButton"
+                        LabelPosition="Collapsed">
                         <AppBarButton.Icon>
                             <FontIcon Glyph="&#xE7A7;" />
                         </AppBarButton.Icon>
@@ -152,9 +149,8 @@
                     <AppBarButton
                         x:Name="RedoButton"
                         Click="Redo_Click"
-                        Label="重做"
-                        LabelPosition="Collapsed"
-                        ToolTipService.ToolTip="重做 (Ctrl+Y)">
+                        x:Uid="RedoButton"
+                        LabelPosition="Collapsed">
                         <AppBarButton.Icon>
                             <FontIcon Glyph="&#xE7A6;" />
                         </AppBarButton.Icon>
@@ -167,7 +163,7 @@
                     <AppBarButton
                         x:Name="SortButton"
                         Click="SortByName_Click"
-                        Label="按文件名排序">
+                        x:Uid="SortButton">
                         <AppBarButton.Icon>
                             <FontIcon Glyph="&#xE8CB;" />
                         </AppBarButton.Icon>
@@ -175,9 +171,8 @@
                     <AppBarButton
                         x:Name="PreviewButton"
                         Click="PreviewButton_Click"
-                        Label="预览"
-                        LabelPosition="Collapsed"
-                        ToolTipService.ToolTip="预览 (Enter / 双击)">
+                        x:Uid="PreviewButton"
+                        LabelPosition="Collapsed">
                         <AppBarButton.Icon>
                             <FontIcon Glyph="&#xE8A1;" />
                         </AppBarButton.Icon>
@@ -185,9 +180,8 @@
                     <AppBarButton
                         x:Name="DeleteButton"
                         Click="ToggleDelete_Click"
-                        Label="标记删除"
-                        LabelPosition="Collapsed"
-                        ToolTipService.ToolTip="标记 / 取消标记删除所选图片 (Delete)，保存时移到回收站">
+                        x:Uid="DeleteButton"
+                        LabelPosition="Collapsed">
                         <AppBarButton.Icon>
                             <FontIcon Glyph="&#xE74D;" />
                         </AppBarButton.Icon>
@@ -195,9 +189,8 @@
                     <AppBarButton
                         x:Name="StripButton"
                         Click="StripExif_Click"
-                        Label="移除 EXIF"
-                        LabelPosition="Collapsed"
-                        ToolTipService.ToolTip="移除所选图片（未选择时为全部）的 EXIF 等元数据">
+                        x:Uid="StripButton"
+                        LabelPosition="Collapsed">
                         <AppBarButton.Icon>
                             <FontIcon Glyph="&#xE8EC;" />
                         </AppBarButton.Icon>
@@ -206,8 +199,7 @@
                         x:Name="StagingToggle"
                         Click="StagingToggle_Click"
                         IsChecked="True"
-                        Label="暂存区"
-                        ToolTipService.ToolTip="显示 / 隐藏暂存区">
+                        x:Uid="StagingToggle">
                         <AppBarToggleButton.Icon>
                             <FontIcon Glyph="&#xE7B8;" />
                         </AppBarToggleButton.Icon>
@@ -217,13 +209,13 @@
                     x:Name="SaveButton"
                     Click="Save_Click"
                     Style="{StaticResource AccentButtonStyle}"
-                    ToolTipService.ToolTip="应用排序、重命名与删除 (Ctrl+S)">
+                    x:Uid="SaveButton">
                     <Button.KeyboardAccelerators>
                         <KeyboardAccelerator Key="S" Modifiers="Control" />
                     </Button.KeyboardAccelerators>
                     <StackPanel Orientation="Horizontal" Spacing="8">
                         <FontIcon FontSize="14" Glyph="&#xE74E;" />
-                        <TextBlock Text="保存" />
+                        <TextBlock x:Uid="SaveButtonText" />
                     </StackPanel>
                 </Button>
             </StackPanel>
@@ -337,17 +329,17 @@
                     <TextBlock
                         HorizontalAlignment="Center"
                         Style="{StaticResource BodyStrongTextBlockStyle}"
-                        Text="打开或拖入一个图片文件夹" />
+                        x:Uid="EmptyTitle" />
                     <TextBlock
                         HorizontalAlignment="Center"
                         Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                         Style="{StaticResource CaptionTextBlockStyle}"
-                        Text="拖拽调整顺序、放入暂存区、标记删除，最后一次性保存" />
+                        x:Uid="EmptyHint" />
                     <Button
                         Margin="0,8,0,0"
                         HorizontalAlignment="Center"
                         Click="OpenFolder_Click"
-                        Content="打开文件夹"
+                        x:Uid="EmptyOpenButton"
                         Style="{StaticResource AccentButtonStyle}" />
                 </StackPanel>
 
@@ -376,13 +368,13 @@
                     <TextBlock
                         VerticalAlignment="Center"
                         Style="{StaticResource BodyStrongTextBlockStyle}"
-                        Text="暂存区" />
+                        x:Uid="StagingTitle" />
                     <Button
                         x:Name="AddStagingButton"
                         HorizontalAlignment="Right"
                         Click="AddStaging_Click"
                         Style="{StaticResource SubtleButtonStyle}"
-                        ToolTipService.ToolTip="新建暂存区">
+                        x:Uid="AddStagingButton">
                         <FontIcon FontSize="14" Glyph="&#xE710;" />
                     </Button>
                 </Grid>
@@ -417,7 +409,7 @@
                                                 Background="Transparent"
                                                 BorderThickness="0"
                                                 Text="{x:Bind Name, Mode=TwoWay}"
-                                                ToolTipService.ToolTip="点击修改名称" />
+                                                x:Uid="StagingNameBox" />
                                             <TextBlock
                                                 Grid.Column="1"
                                                 VerticalAlignment="Center"
@@ -431,12 +423,12 @@
                                                 <FontIcon FontSize="12" Glyph="&#xE712;" />
                                                 <Button.Flyout>
                                                     <MenuFlyout>
-                                                        <MenuFlyoutItem Click="StagingRestoreAll_Click" Tag="{x:Bind}" Text="全部放回列表末尾">
+                                                        <MenuFlyoutItem Click="StagingRestoreAll_Click" Tag="{x:Bind}" x:Uid="StagingRestoreAll">
                                                             <MenuFlyoutItem.Icon>
                                                                 <FontIcon Glyph="&#xE74B;" />
                                                             </MenuFlyoutItem.Icon>
                                                         </MenuFlyoutItem>
-                                                        <MenuFlyoutItem Click="StagingRemove_Click" Tag="{x:Bind}" Text="移除暂存区（图片放回末尾）">
+                                                        <MenuFlyoutItem Click="StagingRemove_Click" Tag="{x:Bind}" x:Uid="StagingRemove">
                                                             <MenuFlyoutItem.Icon>
                                                                 <FontIcon Glyph="&#xE711;" />
                                                             </MenuFlyoutItem.Icon>
@@ -502,7 +494,7 @@
                                             Foreground="{ThemeResource TextFillColorTertiaryBrush}"
                                             IsHitTestVisible="False"
                                             Style="{StaticResource CaptionTextBlockStyle}"
-                                            Text="拖入图片"
+                                            x:Uid="StagingEmptyText"
                                             Visibility="{x:Bind EmptyVisibility, Mode=OneWay}" />
                                     </Grid>
                                 </DataTemplate>
@@ -526,7 +518,7 @@
                                 VerticalAlignment="Center"
                                 Foreground="{ThemeResource TextFillColorTertiaryBrush}"
                                 Style="{StaticResource CaptionTextBlockStyle}"
-                                Text="拖到这里新建暂存区"
+                                x:Uid="NewStagingDropText"
                                 TextAlignment="Center"
                                 TextWrapping="Wrap" />
                         </Border>
@@ -559,7 +551,7 @@
                 HorizontalAlignment="Left"
                 Click="PrevButton_Click"
                 Style="{StaticResource RoundIconButtonStyle}"
-                ToolTipService.ToolTip="上一张 (←)">
+                x:Uid="PrevButton">
                 <FontIcon FontSize="16" Glyph="&#xE76B;" />
             </Button>
             <Button
@@ -568,7 +560,7 @@
                 HorizontalAlignment="Right"
                 Click="NextButton_Click"
                 Style="{StaticResource RoundIconButtonStyle}"
-                ToolTipService.ToolTip="下一张 (→)">
+                x:Uid="NextButton">
                 <FontIcon FontSize="16" Glyph="&#xE76C;" />
             </Button>
             <Button
@@ -578,7 +570,7 @@
                 VerticalAlignment="Top"
                 Click="ClosePreview_Click"
                 Style="{StaticResource RoundIconButtonStyle}"
-                ToolTipService.ToolTip="关闭 (Esc)">
+                x:Uid="ClosePreviewButton">
                 <FontIcon FontSize="14" Glyph="&#xE711;" />
             </Button>
             <Border
@@ -603,12 +595,10 @@
         <!--  Save dialog  -->
         <ContentDialog
             x:Name="SaveDialog"
-            Title="保存更改"
-            CloseButtonText="取消"
-            DefaultButton="Primary"
-            PrimaryButtonText="保存">
+            x:Uid="SaveDialog"
+            DefaultButton="Primary">
             <StackPanel Width="400" Spacing="12">
-                <CheckBox x:Name="RenameOnSaveBox" Content="按当前顺序重命名" IsChecked="True" />
+                <CheckBox x:Name="RenameOnSaveBox" x:Uid="RenameOnSaveBox" IsChecked="True" />
                 <StackPanel x:Name="RenameOptionsPanel" Spacing="12">
                     <Grid ColumnSpacing="12">
                         <Grid.ColumnDefinitions>
@@ -617,13 +607,11 @@
                         </Grid.ColumnDefinitions>
                         <TextBox
                             x:Name="PrefixBox"
-                            Header="前缀"
-                            PlaceholderText="例如 IMG_" />
+                            x:Uid="PrefixBox" />
                         <TextBox
                             x:Name="SuffixBox"
                             Grid.Column="1"
-                            Header="后缀"
-                            PlaceholderText="可选" />
+                            x:Uid="SuffixBox" />
                     </Grid>
                     <Grid ColumnSpacing="12">
                         <Grid.ColumnDefinitions>
@@ -632,14 +620,14 @@
                         </Grid.ColumnDefinitions>
                         <NumberBox
                             x:Name="StartBox"
-                            Header="起始序号"
+                            x:Uid="StartBox"
                             Minimum="0"
                             SpinButtonPlacementMode="Compact"
                             Value="1" />
                         <NumberBox
                             x:Name="DigitsBox"
                             Grid.Column="1"
-                            Header="序号位数"
+                            x:Uid="DigitsBox"
                             Maximum="10"
                             Minimum="1"
                             SpinButtonPlacementMode="Compact"
@@ -648,17 +636,17 @@
                     <ComboBox
                         x:Name="StagingModeBox"
                         HorizontalAlignment="Stretch"
-                        Header="暂存区中的图片"
+                        x:Uid="StagingModeBox"
                         SelectedIndex="0">
-                        <x:String>按暂存区顺序追加到末尾</x:String>
-                        <x:String>保持原文件名不动</x:String>
+                        <ComboBoxItem x:Uid="StagingModeAppend" />
+                        <ComboBoxItem x:Uid="StagingModeKeep" />
                     </ComboBox>
-                    <CheckBox x:Name="StripOnRenameBox" Content="同时移除 EXIF 信息（不可撤销）" />
+                    <CheckBox x:Name="StripOnRenameBox" x:Uid="StripOnRenameBox" />
                     <StackPanel Spacing="4">
                         <TextBlock
                             Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                             Style="{StaticResource CaptionTextBlockStyle}"
-                            Text="预览" />
+                            x:Uid="RenamePreviewLabel" />
                         <Border
                             Padding="10,8"
                             Background="{ThemeResource ControlFillColorSecondaryBrush}"

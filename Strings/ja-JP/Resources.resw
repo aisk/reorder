@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AppTitle" xml:space="preserve">
+    <value>Reorder · 画像の並べ替えと名前変更</value>
+  </data>
+  <data name="AppTitleBar.Title" xml:space="preserve">
+    <value>Reorder · 画像の並べ替えと名前変更</value>
+  </data>
+  <data name="MenuPreview.Text" xml:space="preserve">
+    <value>プレビュー</value>
+  </data>
+  <data name="MenuMoveToStart.Text" xml:space="preserve">
+    <value>先頭へ移動</value>
+  </data>
+  <data name="MenuMoveToEnd.Text" xml:space="preserve">
+    <value>末尾へ移動</value>
+  </data>
+  <data name="MenuMoveToStaging.Text" xml:space="preserve">
+    <value>一時置き場へ移動</value>
+  </data>
+  <data name="MenuDelete.Text" xml:space="preserve">
+    <value>削除対象にする</value>
+  </data>
+  <data name="MenuStripExif.Text" xml:space="preserve">
+    <value>EXIF を削除</value>
+  </data>
+  <data name="FolderNameText.Text" xml:space="preserve">
+    <value>フォルダーが開かれていません</value>
+  </data>
+  <data name="ZoomPanel.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>サムネイルのサイズ (Ctrl+ホイール / Ctrl+プラス / Ctrl+マイナス / Ctrl+0)</value>
+  </data>
+  <data name="OpenButton.Label" xml:space="preserve">
+    <value>開く</value>
+  </data>
+  <data name="OpenButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>フォルダーを開く (Ctrl+O)</value>
+  </data>
+  <data name="UndoButton.Label" xml:space="preserve">
+    <value>元に戻す</value>
+  </data>
+  <data name="RedoButton.Label" xml:space="preserve">
+    <value>やり直し</value>
+  </data>
+  <data name="SortButton.Label" xml:space="preserve">
+    <value>名前順に並べ替え</value>
+  </data>
+  <data name="PreviewButton.Label" xml:space="preserve">
+    <value>プレビュー</value>
+  </data>
+  <data name="PreviewButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>プレビュー (Enter / ダブルクリック)</value>
+  </data>
+  <data name="DeleteButton.Label" xml:space="preserve">
+    <value>削除対象にする</value>
+  </data>
+  <data name="DeleteButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>選択した画像を削除対象にする / 解除する (Delete)。保存時にごみ箱へ移動します</value>
+  </data>
+  <data name="StripButton.Label" xml:space="preserve">
+    <value>EXIF を削除</value>
+  </data>
+  <data name="StripButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>選択した画像 (未選択の場合はすべて) から EXIF などのメタデータを削除</value>
+  </data>
+  <data name="StagingToggle.Label" xml:space="preserve">
+    <value>一時置き場</value>
+  </data>
+  <data name="StagingToggle.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>一時置き場の表示 / 非表示</value>
+  </data>
+  <data name="SaveButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>並べ替え・名前変更・削除を適用 (Ctrl+S)</value>
+  </data>
+  <data name="SaveButtonText.Text" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="EmptyTitle.Text" xml:space="preserve">
+    <value>画像フォルダーを開くかドロップしてください</value>
+  </data>
+  <data name="EmptyHint.Text" xml:space="preserve">
+    <value>ドラッグで並べ替え、一時置き場への移動、削除のマークを行い、最後にまとめて保存します</value>
+  </data>
+  <data name="EmptyOpenButton.Content" xml:space="preserve">
+    <value>フォルダーを開く</value>
+  </data>
+  <data name="StagingTitle.Text" xml:space="preserve">
+    <value>一時置き場</value>
+  </data>
+  <data name="AddStagingButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>新しい一時置き場</value>
+  </data>
+  <data name="StagingNameBox.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>クリックして名前を変更</value>
+  </data>
+  <data name="StagingRestoreAll.Text" xml:space="preserve">
+    <value>すべてリストの末尾に戻す</value>
+  </data>
+  <data name="StagingRemove.Text" xml:space="preserve">
+    <value>一時置き場を削除 (画像は末尾に戻ります)</value>
+  </data>
+  <data name="StagingEmptyText.Text" xml:space="preserve">
+    <value>ここに画像をドロップ</value>
+  </data>
+  <data name="NewStagingDropText.Text" xml:space="preserve">
+    <value>ここにドロップして一時置き場を作成</value>
+  </data>
+  <data name="Staging_DefaultName" xml:space="preserve">
+    <value>一時置き場 {0}</value>
+  </data>
+  <data name="Staging_Count" xml:space="preserve">
+    <value>{0} 枚</value>
+  </data>
+  <data name="PrevButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>前へ (←)</value>
+  </data>
+  <data name="NextButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>次へ (→)</value>
+  </data>
+  <data name="ClosePreviewButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>閉じる (Esc)</value>
+  </data>
+  <data name="Preview_PendingDelete" xml:space="preserve">
+    <value>{0} (削除予定)</value>
+  </data>
+  <data name="SaveDialog.Title" xml:space="preserve">
+    <value>変更を保存</value>
+  </data>
+  <data name="SaveDialog.PrimaryButtonText" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="SaveDialog.CloseButtonText" xml:space="preserve">
+    <value>キャンセル</value>
+  </data>
+  <data name="RenameOnSaveBox.Content" xml:space="preserve">
+    <value>現在の順序で名前を変更</value>
+  </data>
+  <data name="PrefixBox.Header" xml:space="preserve">
+    <value>プレフィックス</value>
+  </data>
+  <data name="PrefixBox.PlaceholderText" xml:space="preserve">
+    <value>例: IMG_</value>
+  </data>
+  <data name="SuffixBox.Header" xml:space="preserve">
+    <value>サフィックス</value>
+  </data>
+  <data name="SuffixBox.PlaceholderText" xml:space="preserve">
+    <value>省略可</value>
+  </data>
+  <data name="StartBox.Header" xml:space="preserve">
+    <value>開始番号</value>
+  </data>
+  <data name="DigitsBox.Header" xml:space="preserve">
+    <value>桁数</value>
+  </data>
+  <data name="StagingModeBox.Header" xml:space="preserve">
+    <value>一時置き場の画像</value>
+  </data>
+  <data name="StagingModeAppend.Content" xml:space="preserve">
+    <value>一時置き場の順序で末尾に追加</value>
+  </data>
+  <data name="StagingModeKeep.Content" xml:space="preserve">
+    <value>元のファイル名のままにする</value>
+  </data>
+  <data name="StripOnRenameBox.Content" xml:space="preserve">
+    <value>EXIF 情報も削除する (元に戻せません)</value>
+  </data>
+  <data name="RenamePreviewLabel.Text" xml:space="preserve">
+    <value>プレビュー</value>
+  </data>
+  <data name="Preview_NoImages" xml:space="preserve">
+    <value>(名前を付ける画像がありません)</value>
+  </data>
+  <data name="Summary_WillDelete" xml:space="preserve">
+    <value>削除対象の {0} 個のファイルをごみ箱へ移動します (このアプリでは元に戻せません)。</value>
+  </data>
+  <data name="Summary_WillRename" xml:space="preserve">
+    <value>{0} 個のファイルの名前を変更します。</value>
+  </data>
+  <data name="Summary_NoRenameNeeded" xml:space="preserve">
+    <value>変更が必要なファイル名はありません。</value>
+  </data>
+  <data name="Summary_OrderNotSaved" xml:space="preserve">
+    <value>名前を変更しない場合、現在の順序と一時置き場は保存されません。</value>
+  </data>
+  <data name="Error_InvalidAffix" xml:space="preserve">
+    <value>プレフィックスまたはサフィックスにファイル名に使えない文字が含まれています。</value>
+  </data>
+  <data name="Error_StagedClash" xml:space="preserve">
+    <value>一時置き場の {0} が新しいファイル名と競合しています。末尾に追加するか、プレフィックス / 開始番号を変更してください。</value>
+  </data>
+  <data name="Status_CannotSave" xml:space="preserve">
+    <value>保存できません</value>
+  </data>
+  <data name="Error_TargetExists" xml:space="preserve">
+    <value>対象ファイルが既に存在し、リストに含まれていません: {0}</value>
+  </data>
+  <data name="Error_DuplicateTarget" xml:space="preserve">
+    <value>対象ファイル名が重複しています: {0}</value>
+  </data>
+  <data name="Msg_Deleted" xml:space="preserve">
+    <value>{0} 個のファイルをごみ箱へ移動しました。</value>
+  </data>
+  <data name="Status_DeleteFailed" xml:space="preserve">
+    <value>一部のファイルを削除できなかったため、名前の変更は行われませんでした</value>
+  </data>
+  <data name="Msg_DeleteFailedDetail" xml:space="preserve">
+    <value>{0} 個のファイルを削除できませんでした: {1}</value>
+  </data>
+  <data name="Msg_Renamed" xml:space="preserve">
+    <value>{0} 個のファイルの名前を変更しました。</value>
+  </data>
+  <data name="Msg_NoNameChanged" xml:space="preserve">
+    <value>ファイル名は変更されませんでした。</value>
+  </data>
+  <data name="Status_Saved" xml:space="preserve">
+    <value>保存しました</value>
+  </data>
+  <data name="Status_RenameFailed" xml:space="preserve">
+    <value>名前の変更に失敗したため、元に戻しました</value>
+  </data>
+  <data name="Action_SortByName" xml:space="preserve">
+    <value>名前順に並べ替え</value>
+  </data>
+  <data name="Action_MoveToStart" xml:space="preserve">
+    <value>先頭へ移動</value>
+  </data>
+  <data name="Action_MoveToEnd" xml:space="preserve">
+    <value>末尾へ移動</value>
+  </data>
+  <data name="Action_Drag" xml:space="preserve">
+    <value>ドラッグ</value>
+  </data>
+  <data name="Action_MoveToStaging" xml:space="preserve">
+    <value>一時置き場へ移動</value>
+  </data>
+  <data name="Action_NewStaging" xml:space="preserve">
+    <value>新しい一時置き場</value>
+  </data>
+  <data name="Action_RestoreAll" xml:space="preserve">
+    <value>すべて戻す</value>
+  </data>
+  <data name="Action_RemoveStaging" xml:space="preserve">
+    <value>一時置き場を削除</value>
+  </data>
+  <data name="Action_MarkDelete" xml:space="preserve">
+    <value>削除対象にする</value>
+  </data>
+  <data name="Action_UnmarkDelete" xml:space="preserve">
+    <value>削除対象を解除</value>
+  </data>
+  <data name="Action_AppendStaged" xml:space="preserve">
+    <value>一時置き場を末尾に追加</value>
+  </data>
+  <data name="Action_SaveRename" xml:space="preserve">
+    <value>保存時の名前変更</value>
+  </data>
+  <data name="Drag_OpenFolder" xml:space="preserve">
+    <value>このフォルダーを開く</value>
+  </data>
+  <data name="Drag_BackToList" xml:space="preserve">
+    <value>リストに戻す</value>
+  </data>
+  <data name="Drag_ToArea" xml:space="preserve">
+    <value>「{0}」へ移動</value>
+  </data>
+  <data name="Status_Undone" xml:space="preserve">
+    <value>元に戻しました</value>
+  </data>
+  <data name="Status_Redone" xml:space="preserve">
+    <value>やり直しました</value>
+  </data>
+  <data name="Status_UndoFailed" xml:space="preserve">
+    <value>元に戻せませんでした</value>
+  </data>
+  <data name="Status_RedoFailed" xml:space="preserve">
+    <value>やり直せませんでした</value>
+  </data>
+  <data name="Status_RenameUndoDetail" xml:space="preserve">
+    <value>{0} ({1} 個のファイル)</value>
+  </data>
+  <data name="Tooltip_Undo" xml:space="preserve">
+    <value>元に戻す (Ctrl+Z)</value>
+  </data>
+  <data name="Tooltip_UndoAction" xml:space="preserve">
+    <value>元に戻す: {0} (Ctrl+Z)</value>
+  </data>
+  <data name="Tooltip_Redo" xml:space="preserve">
+    <value>やり直し (Ctrl+Y)</value>
+  </data>
+  <data name="Tooltip_RedoAction" xml:space="preserve">
+    <value>やり直し: {0} (Ctrl+Y)</value>
+  </data>
+  <data name="Status_CannotReadFolder" xml:space="preserve">
+    <value>フォルダーを読み取れません</value>
+  </data>
+  <data name="Discard_Title" xml:space="preserve">
+    <value>未保存の変更があります</value>
+  </data>
+  <data name="Discard_Content" xml:space="preserve">
+    <value>現在の順序、一時置き場、削除のマークは保存されていません。破棄しますか？</value>
+  </data>
+  <data name="Discard_Primary" xml:space="preserve">
+    <value>破棄</value>
+  </data>
+  <data name="Common_Cancel" xml:space="preserve">
+    <value>キャンセル</value>
+  </data>
+  <data name="Summary_NoFolder" xml:space="preserve">
+    <value>画像のあるフォルダーを開いて始めましょう</value>
+  </data>
+  <data name="Summary_ListCount" xml:space="preserve">
+    <value>リスト {0} 枚</value>
+  </data>
+  <data name="Summary_Staged" xml:space="preserve">
+    <value>一時置き場 {0} 枚</value>
+  </data>
+  <data name="Summary_PendingDelete" xml:space="preserve">
+    <value>削除予定 {0} 枚</value>
+  </data>
+  <data name="Summary_Selected" xml:space="preserve">
+    <value>{0} 枚選択中</value>
+  </data>
+  <data name="Summary_Unsaved" xml:space="preserve">
+    <value>未保存の変更あり</value>
+  </data>
+  <data name="Summary_DragHint" xml:space="preserve">
+    <value>ドラッグで並べ替え</value>
+  </data>
+  <data name="Strip_Title" xml:space="preserve">
+    <value>EXIF 情報を削除</value>
+  </data>
+  <data name="Strip_Content" xml:space="preserve">
+    <value>{0} 枚の画像から EXIF、XMP、GPS などのメタデータを削除します (向きとカラープロファイルは保持されます)。
+
+元のファイルを直接変更し、元に戻すことはできません。</value>
+  </data>
+  <data name="Strip_Primary" xml:space="preserve">
+    <value>削除</value>
+  </data>
+  <data name="Status_StripDone" xml:space="preserve">
+    <value>EXIF の削除が完了しました</value>
+  </data>
+  <data name="Strip_Cleaned" xml:space="preserve">
+    <value>{0} 枚をクリーンアップ</value>
+  </data>
+  <data name="Strip_AlreadyClean" xml:space="preserve">
+    <value>{0} 枚は処理不要</value>
+  </data>
+  <data name="Strip_Unsupported" xml:space="preserve">
+    <value>{0} 枚は非対応の形式 (JPEG / PNG / WebP のみ対応)</value>
+  </data>
+  <data name="Strip_Failed" xml:space="preserve">
+    <value>{0} 枚失敗: {1}</value>
+  </data>
+  <data name="Strip_Sentence" xml:space="preserve">
+    <value>{0}。</value>
+  </data>
+  <data name="ListSeparator" xml:space="preserve">
+    <value>、</value>
+  </data>
+  <data name="Error_InvalidFile" xml:space="preserve">
+    <value>有効な {0} ファイルではありません。</value>
+  </data>
+  <data name="Error_CorruptFile" xml:space="preserve">
+    <value>{0} の構造が壊れています。</value>
+  </data>
+  <data name="Error_JpegNoData" xml:space="preserve">
+    <value>JPEG に画像データがありません。</value>
+  </data>
+</root>

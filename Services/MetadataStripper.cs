@@ -72,7 +72,7 @@ public static class MetadataStripper
     private static byte[]? StripJpeg(byte[] d)
     {
         if (d.Length < 4 || d[0] != 0xFF || d[1] != 0xD8)
-            throw new InvalidDataException("不是有效的 JPEG 文件。");
+            throw new InvalidDataException(Loc.Format("Error_InvalidFile", "JPEG"));
 
         var kept = new List<(int Start, int Length, byte Marker)>();
         ushort orientation = 1;
@@ -82,7 +82,7 @@ public static class MetadataStripper
 
         while (pos < d.Length)
         {
-            if (d[pos] != 0xFF) throw new InvalidDataException("JPEG 结构损坏。");
+            if (d[pos] != 0xFF) throw new InvalidDataException(Loc.Format("Error_CorruptFile", "JPEG"));
             int start = pos;
             while (pos < d.Length && d[pos] == 0xFF) pos++; // fill bytes
             if (pos >= d.Length) break;
@@ -99,9 +99,9 @@ public static class MetadataStripper
                 break;
             }
 
-            if (pos + 2 > d.Length) throw new InvalidDataException("JPEG 结构损坏。");
+            if (pos + 2 > d.Length) throw new InvalidDataException(Loc.Format("Error_CorruptFile", "JPEG"));
             int len = (d[pos] << 8) | d[pos + 1];
-            if (len < 2 || pos + len > d.Length) throw new InvalidDataException("JPEG 结构损坏。");
+            if (len < 2 || pos + len > d.Length) throw new InvalidDataException(Loc.Format("Error_CorruptFile", "JPEG"));
             var payload = d.AsSpan(pos + 2, len - 2);
             int end = pos + len;
 
@@ -118,7 +118,7 @@ public static class MetadataStripper
             pos = end;
         }
 
-        if (scanStart < 0) throw new InvalidDataException("JPEG 中没有图像数据。");
+        if (scanStart < 0) throw new InvalidDataException(Loc.Get("Error_JpegNoData"));
 
         // Drop anything appended after the primary image (e.g. MPF secondary images).
         int tailEnd = FindJpegEnd(d, scanStart);
@@ -181,7 +181,7 @@ public static class MetadataStripper
 
     private static byte[]? StripPng(byte[] d)
     {
-        if (!d.AsSpan().StartsWith(PngSignature)) throw new InvalidDataException("不是有效的 PNG 文件。");
+        if (!d.AsSpan().StartsWith(PngSignature)) throw new InvalidDataException(Loc.Format("Error_InvalidFile", "PNG"));
 
         var kept = new List<(int Start, int Length, string Type)>();
         ushort orientation = 1;
@@ -191,7 +191,7 @@ public static class MetadataStripper
         while (pos + 12 <= d.Length)
         {
             uint len = BinaryPrimitives.ReadUInt32BigEndian(d.AsSpan(pos));
-            if (len > (uint)(d.Length - pos - 12)) throw new InvalidDataException("PNG 结构损坏。");
+            if (len > (uint)(d.Length - pos - 12)) throw new InvalidDataException(Loc.Format("Error_CorruptFile", "PNG"));
             string type = Encoding.ASCII.GetString(d, pos + 4, 4);
             int total = 12 + (int)len;
 
@@ -244,7 +244,7 @@ public static class MetadataStripper
     private static byte[]? StripWebp(byte[] d)
     {
         if (d.Length < 12 || Encoding.ASCII.GetString(d, 0, 4) != "RIFF" || Encoding.ASCII.GetString(d, 8, 4) != "WEBP")
-            throw new InvalidDataException("不是有效的 WebP 文件。");
+            throw new InvalidDataException(Loc.Format("Error_InvalidFile", "WebP"));
 
         long riffEnd = Math.Min(d.Length, 8L + BinaryPrimitives.ReadUInt32LittleEndian(d.AsSpan(4)));
         var kept = new List<(int Start, int Length, string FourCC)>();
@@ -257,7 +257,7 @@ public static class MetadataStripper
         {
             string cc = Encoding.ASCII.GetString(d, pos, 4);
             uint size = BinaryPrimitives.ReadUInt32LittleEndian(d.AsSpan(pos + 4));
-            if (size > (uint)(d.Length - pos - 8)) throw new InvalidDataException("WebP 结构损坏。");
+            if (size > (uint)(d.Length - pos - 8)) throw new InvalidDataException(Loc.Format("Error_CorruptFile", "WebP"));
             int total = (int)Math.Min(8L + size + (size & 1), d.Length - pos);
 
             if (cc is "EXIF" or "XMP ")

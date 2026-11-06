@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AppTitle" xml:space="preserve">
+    <value>Reorder · Réorganiser et renommer des images</value>
+  </data>
+  <data name="AppTitleBar.Title" xml:space="preserve">
+    <value>Reorder · Réorganiser et renommer des images</value>
+  </data>
+  <data name="MenuPreview.Text" xml:space="preserve">
+    <value>Aperçu</value>
+  </data>
+  <data name="MenuMoveToStart.Text" xml:space="preserve">
+    <value>Déplacer au début</value>
+  </data>
+  <data name="MenuMoveToEnd.Text" xml:space="preserve">
+    <value>Déplacer à la fin</value>
+  </data>
+  <data name="MenuMoveToStaging.Text" xml:space="preserve">
+    <value>Déplacer vers une zone d'attente</value>
+  </data>
+  <data name="MenuDelete.Text" xml:space="preserve">
+    <value>Marquer pour suppression</value>
+  </data>
+  <data name="MenuStripExif.Text" xml:space="preserve">
+    <value>Supprimer les EXIF</value>
+  </data>
+  <data name="FolderNameText.Text" xml:space="preserve">
+    <value>Aucun dossier ouvert</value>
+  </data>
+  <data name="ZoomPanel.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>Taille des miniatures (Ctrl+molette / Ctrl+Plus / Ctrl+Moins / Ctrl+0)</value>
+  </data>
+  <data name="OpenButton.Label" xml:space="preserve">
+    <value>Ouvrir</value>
+  </data>
+  <data name="OpenButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>Ouvrir un dossier (Ctrl+O)</value>
+  </data>
+  <data name="UndoButton.Label" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="RedoButton.Label" xml:space="preserve">
+    <value>Rétablir</value>
+  </data>
+  <data name="SortButton.Label" xml:space="preserve">
+    <value>Trier par nom</value>
+  </data>
+  <data name="PreviewButton.Label" xml:space="preserve">
+    <value>Aperçu</value>
+  </data>
+  <data name="PreviewButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>Aperçu (Entrée / double-clic)</value>
+  </data>
+  <data name="DeleteButton.Label" xml:space="preserve">
+    <value>Marquer pour suppression</value>
+  </data>
+  <data name="DeleteButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>Marquer ou démarquer les images sélectionnées pour suppression (Suppr). Elles sont placées dans la Corbeille à l'enregistrement.</value>
+  </data>
+  <data name="StripButton.Label" xml:space="preserve">
+    <value>Supprimer les EXIF</value>
+  </data>
+  <data name="StripButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>Supprimer les EXIF et autres métadonnées des images sélectionnées (toutes si aucune n'est sélectionnée)</value>
+  </data>
+  <data name="StagingToggle.Label" xml:space="preserve">
+    <value>Attente</value>
+  </data>
+  <data name="StagingToggle.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>Afficher / masquer les zones d'attente</value>
+  </data>
+  <data name="SaveButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>Appliquer l'ordre, les renommages et les suppressions (Ctrl+S)</value>
+  </data>
+  <data name="SaveButtonText.Text" xml:space="preserve">
+    <value>Enregistrer</value>
+  </data>
+  <data name="EmptyTitle.Text" xml:space="preserve">
+    <value>Ouvrez ou déposez un dossier d'images</value>
+  </data>
+  <data name="EmptyHint.Text" xml:space="preserve">
+    <value>Faites glisser pour réorganiser, placez des images en attente, marquez-les pour suppression, puis enregistrez tout en une fois</value>
+  </data>
+  <data name="EmptyOpenButton.Content" xml:space="preserve">
+    <value>Ouvrir un dossier</value>
+  </data>
+  <data name="StagingTitle.Text" xml:space="preserve">
+    <value>Zones d'attente</value>
+  </data>
+  <data name="AddStagingButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>Nouvelle zone d'attente</value>
+  </data>
+  <data name="StagingNameBox.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>Cliquez pour renommer</value>
+  </data>
+  <data name="StagingRestoreAll.Text" xml:space="preserve">
+    <value>Tout remettre à la fin de la liste</value>
+  </data>
+  <data name="StagingRemove.Text" xml:space="preserve">
+    <value>Supprimer la zone d'attente (les images retournent à la fin)</value>
+  </data>
+  <data name="StagingEmptyText.Text" xml:space="preserve">
+    <value>Déposez des images ici</value>
+  </data>
+  <data name="NewStagingDropText.Text" xml:space="preserve">
+    <value>Déposez ici pour créer une zone d'attente</value>
+  </data>
+  <data name="Staging_DefaultName" xml:space="preserve">
+    <value>Attente {0}</value>
+  </data>
+  <data name="Staging_Count" xml:space="preserve">
+    <value>{0}</value>
+  </data>
+  <data name="PrevButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>Précédente (←)</value>
+  </data>
+  <data name="NextButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>Suivante (→)</value>
+  </data>
+  <data name="ClosePreviewButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>Fermer (Échap)</value>
+  </data>
+  <data name="Preview_PendingDelete" xml:space="preserve">
+    <value>{0} (suppression en attente)</value>
+  </data>
+  <data name="SaveDialog.Title" xml:space="preserve">
+    <value>Enregistrer les modifications</value>
+  </data>
+  <data name="SaveDialog.PrimaryButtonText" xml:space="preserve">
+    <value>Enregistrer</value>
+  </data>
+  <data name="SaveDialog.CloseButtonText" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="RenameOnSaveBox.Content" xml:space="preserve">
+    <value>Renommer dans l'ordre actuel</value>
+  </data>
+  <data name="PrefixBox.Header" xml:space="preserve">
+    <value>Préfixe</value>
+  </data>
+  <data name="PrefixBox.PlaceholderText" xml:space="preserve">
+    <value>ex. IMG_</value>
+  </data>
+  <data name="SuffixBox.Header" xml:space="preserve">
+    <value>Suffixe</value>
+  </data>
+  <data name="SuffixBox.PlaceholderText" xml:space="preserve">
+    <value>Facultatif</value>
+  </data>
+  <data name="StartBox.Header" xml:space="preserve">
+    <value>Numéro de départ</value>
+  </data>
+  <data name="DigitsBox.Header" xml:space="preserve">
+    <value>Chiffres</value>
+  </data>
+  <data name="StagingModeBox.Header" xml:space="preserve">
+    <value>Images en attente</value>
+  </data>
+  <data name="StagingModeAppend.Content" xml:space="preserve">
+    <value>Ajouter à la fin dans l'ordre des zones</value>
+  </data>
+  <data name="StagingModeKeep.Content" xml:space="preserve">
+    <value>Conserver les noms d'origine</value>
+  </data>
+  <data name="StripOnRenameBox.Content" xml:space="preserve">
+    <value>Supprimer aussi les données EXIF (irréversible)</value>
+  </data>
+  <data name="RenamePreviewLabel.Text" xml:space="preserve">
+    <value>Aperçu</value>
+  </data>
+  <data name="Preview_NoImages" xml:space="preserve">
+    <value>(Aucune image à nommer)</value>
+  </data>
+  <data name="Summary_WillDelete" xml:space="preserve">
+    <value>{0} fichier(s) marqué(s) pour suppression seront placés dans la Corbeille (irréversible dans cette application).</value>
+  </data>
+  <data name="Summary_WillRename" xml:space="preserve">
+    <value>{0} fichier(s) seront renommés.</value>
+  </data>
+  <data name="Summary_NoRenameNeeded" xml:space="preserve">
+    <value>Aucun nom de fichier ne doit changer.</value>
+  </data>
+  <data name="Summary_OrderNotSaved" xml:space="preserve">
+    <value>Sans renommage, l'ordre actuel et les zones d'attente ne seront pas enregistrés.</value>
+  </data>
+  <data name="Error_InvalidAffix" xml:space="preserve">
+    <value>Le préfixe ou le suffixe contient des caractères interdits dans les noms de fichiers.</value>
+  </data>
+  <data name="Error_StagedClash" xml:space="preserve">
+    <value>{0} (en attente) entre en conflit avec un nouveau nom de fichier. Ajoutez les images en attente à la fin ou modifiez le préfixe / numéro de départ.</value>
+  </data>
+  <data name="Status_CannotSave" xml:space="preserve">
+    <value>Enregistrement impossible</value>
+  </data>
+  <data name="Error_TargetExists" xml:space="preserve">
+    <value>Le fichier cible existe déjà et n'est pas dans la liste : {0}</value>
+  </data>
+  <data name="Error_DuplicateTarget" xml:space="preserve">
+    <value>Nom de fichier cible en double : {0}</value>
+  </data>
+  <data name="Msg_Deleted" xml:space="preserve">
+    <value>{0} fichier(s) placé(s) dans la Corbeille.</value>
+  </data>
+  <data name="Status_DeleteFailed" xml:space="preserve">
+    <value>Certains fichiers n'ont pas pu être supprimés ; aucun renommage effectué</value>
+  </data>
+  <data name="Msg_DeleteFailedDetail" xml:space="preserve">
+    <value>{0} fichier(s) n'ont pas pu être supprimés : {1}</value>
+  </data>
+  <data name="Msg_Renamed" xml:space="preserve">
+    <value>{0} fichier(s) renommé(s).</value>
+  </data>
+  <data name="Msg_NoNameChanged" xml:space="preserve">
+    <value>Aucun nom de fichier n'a changé.</value>
+  </data>
+  <data name="Status_Saved" xml:space="preserve">
+    <value>Enregistré</value>
+  </data>
+  <data name="Status_RenameFailed" xml:space="preserve">
+    <value>Échec du renommage ; modifications annulées</value>
+  </data>
+  <data name="Action_SortByName" xml:space="preserve">
+    <value>Trier par nom</value>
+  </data>
+  <data name="Action_MoveToStart" xml:space="preserve">
+    <value>Déplacer au début</value>
+  </data>
+  <data name="Action_MoveToEnd" xml:space="preserve">
+    <value>Déplacer à la fin</value>
+  </data>
+  <data name="Action_Drag" xml:space="preserve">
+    <value>Glisser</value>
+  </data>
+  <data name="Action_MoveToStaging" xml:space="preserve">
+    <value>Déplacer vers une zone d'attente</value>
+  </data>
+  <data name="Action_NewStaging" xml:space="preserve">
+    <value>Nouvelle zone d'attente</value>
+  </data>
+  <data name="Action_RestoreAll" xml:space="preserve">
+    <value>Tout remettre</value>
+  </data>
+  <data name="Action_RemoveStaging" xml:space="preserve">
+    <value>Supprimer la zone d'attente</value>
+  </data>
+  <data name="Action_MarkDelete" xml:space="preserve">
+    <value>Marquer pour suppression</value>
+  </data>
+  <data name="Action_UnmarkDelete" xml:space="preserve">
+    <value>Annuler la marque de suppression</value>
+  </data>
+  <data name="Action_AppendStaged" xml:space="preserve">
+    <value>Ajouter les images en attente</value>
+  </data>
+  <data name="Action_SaveRename" xml:space="preserve">
+    <value>Renommage à l'enregistrement</value>
+  </data>
+  <data name="Drag_OpenFolder" xml:space="preserve">
+    <value>Ouvrir ce dossier</value>
+  </data>
+  <data name="Drag_BackToList" xml:space="preserve">
+    <value>Remettre dans la liste</value>
+  </data>
+  <data name="Drag_ToArea" xml:space="preserve">
+    <value>Déplacer vers « {0} »</value>
+  </data>
+  <data name="Status_Undone" xml:space="preserve">
+    <value>Annulé</value>
+  </data>
+  <data name="Status_Redone" xml:space="preserve">
+    <value>Rétabli</value>
+  </data>
+  <data name="Status_UndoFailed" xml:space="preserve">
+    <value>Échec de l'annulation</value>
+  </data>
+  <data name="Status_RedoFailed" xml:space="preserve">
+    <value>Échec du rétablissement</value>
+  </data>
+  <data name="Status_RenameUndoDetail" xml:space="preserve">
+    <value>{0} ({1} fichier(s))</value>
+  </data>
+  <data name="Tooltip_Undo" xml:space="preserve">
+    <value>Annuler (Ctrl+Z)</value>
+  </data>
+  <data name="Tooltip_UndoAction" xml:space="preserve">
+    <value>Annuler : {0} (Ctrl+Z)</value>
+  </data>
+  <data name="Tooltip_Redo" xml:space="preserve">
+    <value>Rétablir (Ctrl+Y)</value>
+  </data>
+  <data name="Tooltip_RedoAction" xml:space="preserve">
+    <value>Rétablir : {0} (Ctrl+Y)</value>
+  </data>
+  <data name="Status_CannotReadFolder" xml:space="preserve">
+    <value>Impossible de lire le dossier</value>
+  </data>
+  <data name="Discard_Title" xml:space="preserve">
+    <value>Modifications non enregistrées</value>
+  </data>
+  <data name="Discard_Content" xml:space="preserve">
+    <value>L'ordre actuel, les zones d'attente et les marques de suppression n'ont pas été enregistrés. Les abandonner ?</value>
+  </data>
+  <data name="Discard_Primary" xml:space="preserve">
+    <value>Abandonner</value>
+  </data>
+  <data name="Common_Cancel" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="Summary_NoFolder" xml:space="preserve">
+    <value>Ouvrez un dossier d'images pour commencer</value>
+  </data>
+  <data name="Summary_ListCount" xml:space="preserve">
+    <value>{0} dans la liste</value>
+  </data>
+  <data name="Summary_Staged" xml:space="preserve">
+    <value>{0} en attente</value>
+  </data>
+  <data name="Summary_PendingDelete" xml:space="preserve">
+    <value>{0} à supprimer</value>
+  </data>
+  <data name="Summary_Selected" xml:space="preserve">
+    <value>{0} sélectionnée(s)</value>
+  </data>
+  <data name="Summary_Unsaved" xml:space="preserve">
+    <value>Modifications non enregistrées</value>
+  </data>
+  <data name="Summary_DragHint" xml:space="preserve">
+    <value>Glissez pour réorganiser</value>
+  </data>
+  <data name="Strip_Title" xml:space="preserve">
+    <value>Supprimer les données EXIF</value>
+  </data>
+  <data name="Strip_Content" xml:space="preserve">
+    <value>Les métadonnées EXIF, XMP, GPS, etc. seront supprimées de {0} image(s) (l'orientation et le profil de couleur sont conservés).
+
+Les fichiers d'origine sont modifiés directement et l'opération est irréversible.</value>
+  </data>
+  <data name="Strip_Primary" xml:space="preserve">
+    <value>Supprimer</value>
+  </data>
+  <data name="Status_StripDone" xml:space="preserve">
+    <value>Suppression des EXIF terminée</value>
+  </data>
+  <data name="Strip_Cleaned" xml:space="preserve">
+    <value>{0} nettoyée(s)</value>
+  </data>
+  <data name="Strip_AlreadyClean" xml:space="preserve">
+    <value>{0} déjà propre(s)</value>
+  </data>
+  <data name="Strip_Unsupported" xml:space="preserve">
+    <value>{0} non prise(s) en charge (JPEG / PNG / WebP uniquement)</value>
+  </data>
+  <data name="Strip_Failed" xml:space="preserve">
+    <value>{0} en échec : {1}</value>
+  </data>
+  <data name="Strip_Sentence" xml:space="preserve">
+    <value>{0}.</value>
+  </data>
+  <data name="ListSeparator" xml:space="preserve">
+    <value>, </value>
+  </data>
+  <data name="Error_InvalidFile" xml:space="preserve">
+    <value>Fichier {0} non valide.</value>
+  </data>
+  <data name="Error_CorruptFile" xml:space="preserve">
+    <value>La structure {0} est endommagée.</value>
+  </data>
+  <data name="Error_JpegNoData" xml:space="preserve">
+    <value>Le JPEG ne contient pas de données d'image.</value>
+  </data>
+</root>
