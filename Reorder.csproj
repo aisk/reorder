@@ -13,6 +13,15 @@
     <EnableMsixTooling>true</EnableMsixTooling>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <!--
+      Lets the CsWinRT source generator emit the (unsafe) interop code for generic collections
+      such as ObservableCollection<T> bound to ItemsSource. Without it the generator silently
+      skips them (warning CsWinRT1030, hidden at the default warning level) and trimmed builds
+      crash on startup.
+    -->
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <!-- Recommended by CsWinRT for trimmed apps: surface every type that needs generated interop code. -->
+    <CsWinRTAotWarningLevel>2</CsWinRTAotWarningLevel>
   </PropertyGroup>
 
   <ItemGroup>
@@ -67,5 +76,11 @@
   <PropertyGroup>
     <PublishReadyToRun Condition="'$(Configuration)' == 'Debug'">False</PublishReadyToRun>
     <PublishReadyToRun Condition="'$(Configuration)' != 'Debug'">True</PublishReadyToRun>
+    <!--
+      Trimming requires a self-contained app, which the per-platform publish profile configures.
+      Without a profile (e.g. no Platform on the command line) it would fail with NETSDK1102.
+    -->
+    <PublishTrimmed Condition="'$(Configuration)' == 'Debug' or '$(PublishProfile)' == ''">False</PublishTrimmed>
+    <PublishTrimmed Condition="'$(Configuration)' != 'Debug' and '$(PublishProfile)' != ''">True</PublishTrimmed>
   </PropertyGroup>
 </Project>
