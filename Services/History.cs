@@ -4,8 +4,23 @@ namespace Reorder.Services;
 
 public abstract record HistoryEntry(string Description);
 
-/// <summary>A change of display order.</summary>
-public sealed record OrderEntry(string Description, IReadOnlyList<ImageItem> Before, IReadOnlyList<ImageItem> After)
+/// <summary>
+/// The pending (unsaved) arrangement: main order, staging areas and deletion marks.
+/// </summary>
+public sealed record LayoutSnapshot(
+    IReadOnlyList<ImageItem> Main,
+    IReadOnlyList<(StagingArea Area, IReadOnlyList<ImageItem> Items)> Areas,
+    IReadOnlyList<ImageItem> Deleted)
+{
+    public bool SameAs(LayoutSnapshot other) =>
+        Main.SequenceEqual(other.Main) &&
+        Deleted.ToHashSet().SetEquals(other.Deleted) &&
+        Areas.Count == other.Areas.Count &&
+        Areas.Zip(other.Areas).All(p => ReferenceEquals(p.First.Area, p.Second.Area) && p.First.Items.SequenceEqual(p.Second.Items));
+}
+
+/// <summary>A change of the pending arrangement.</summary>
+public sealed record LayoutEntry(string Description, LayoutSnapshot Before, LayoutSnapshot After)
     : HistoryEntry(Description);
 
 /// <summary>A batch rename on disk.</summary>

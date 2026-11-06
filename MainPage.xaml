@@ -17,6 +17,11 @@
             <Setter Property="CornerRadius" Value="22" />
         </Style>
 
+        <Style x:Key="StretchGridViewItemStyle" TargetType="GridViewItem" BasedOn="{StaticResource DefaultGridViewItemStyle}">
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        </Style>
+
         <MenuFlyout x:Key="ItemMenu" Opening="ItemMenu_Opening">
             <MenuFlyoutItem Text="预览" Click="MenuPreview_Click">
                 <MenuFlyoutItem.Icon>
@@ -34,7 +39,21 @@
                     <FontIcon Glyph="&#xE74B;" />
                 </MenuFlyoutItem.Icon>
             </MenuFlyoutItem>
+            <MenuFlyoutSubItem Text="移到暂存区" Tag="StagingMenu">
+                <MenuFlyoutSubItem.Icon>
+                    <FontIcon Glyph="&#xE7B8;" />
+                </MenuFlyoutSubItem.Icon>
+            </MenuFlyoutSubItem>
             <MenuFlyoutSeparator />
+            <MenuFlyoutItem
+                Click="MenuToggleDelete_Click"
+                KeyboardAcceleratorTextOverride="Delete"
+                Tag="DeleteItem"
+                Text="标记删除">
+                <MenuFlyoutItem.Icon>
+                    <FontIcon Glyph="&#xE74D;" />
+                </MenuFlyoutItem.Icon>
+            </MenuFlyoutItem>
             <MenuFlyoutItem Text="移除 EXIF" Click="MenuStripExif_Click">
                 <MenuFlyoutItem.Icon>
                     <FontIcon Glyph="&#xE8EC;" />
@@ -67,7 +86,8 @@
                     Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                     Style="{StaticResource CaptionTextBlockStyle}"
                     Text="打开一个包含图片的文件夹开始"
-                    TextTrimming="CharacterEllipsis" />
+                    TextTrimming="CharacterEllipsis"
+                    TextWrapping="NoWrap" />
             </StackPanel>
 
             <StackPanel
@@ -75,6 +95,29 @@
                 VerticalAlignment="Center"
                 Orientation="Horizontal"
                 Spacing="8">
+                <StackPanel
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal"
+                    Spacing="6"
+                    ToolTipService.ToolTip="缩略图大小 (Ctrl+滚轮 / Ctrl+加号 / Ctrl+减号 / Ctrl+0)">
+                    <FontIcon
+                        FontSize="14"
+                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                        Glyph="&#xE71F;" />
+                    <Slider
+                        x:Name="ZoomSlider"
+                        Width="120"
+                        VerticalAlignment="Center"
+                        IsThumbToolTipEnabled="False"
+                        Maximum="360"
+                        Minimum="80"
+                        StepFrequency="4"
+                        Value="148" />
+                    <FontIcon
+                        FontSize="14"
+                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                        Glyph="&#xE8A3;" />
+                </StackPanel>
                 <CommandBar
                     x:Name="Toolbar"
                     Background="Transparent"
@@ -133,128 +176,363 @@
                         x:Name="PreviewButton"
                         Click="PreviewButton_Click"
                         Label="预览"
+                        LabelPosition="Collapsed"
                         ToolTipService.ToolTip="预览 (Enter / 双击)">
                         <AppBarButton.Icon>
                             <FontIcon Glyph="&#xE8A1;" />
                         </AppBarButton.Icon>
                     </AppBarButton>
                     <AppBarButton
+                        x:Name="DeleteButton"
+                        Click="ToggleDelete_Click"
+                        Label="标记删除"
+                        LabelPosition="Collapsed"
+                        ToolTipService.ToolTip="标记 / 取消标记删除所选图片 (Delete)，保存时移到回收站">
+                        <AppBarButton.Icon>
+                            <FontIcon Glyph="&#xE74D;" />
+                        </AppBarButton.Icon>
+                    </AppBarButton>
+                    <AppBarButton
                         x:Name="StripButton"
                         Click="StripExif_Click"
                         Label="移除 EXIF"
+                        LabelPosition="Collapsed"
                         ToolTipService.ToolTip="移除所选图片（未选择时为全部）的 EXIF 等元数据">
                         <AppBarButton.Icon>
                             <FontIcon Glyph="&#xE8EC;" />
                         </AppBarButton.Icon>
                     </AppBarButton>
+                    <AppBarToggleButton
+                        x:Name="StagingToggle"
+                        Click="StagingToggle_Click"
+                        IsChecked="True"
+                        Label="暂存区"
+                        ToolTipService.ToolTip="显示 / 隐藏暂存区">
+                        <AppBarToggleButton.Icon>
+                            <FontIcon Glyph="&#xE7B8;" />
+                        </AppBarToggleButton.Icon>
+                    </AppBarToggleButton>
                 </CommandBar>
                 <Button
-                    x:Name="RenameButton"
-                    Click="Rename_Click"
-                    Style="{StaticResource AccentButtonStyle}">
+                    x:Name="SaveButton"
+                    Click="Save_Click"
+                    Style="{StaticResource AccentButtonStyle}"
+                    ToolTipService.ToolTip="应用排序、重命名与删除 (Ctrl+S)">
+                    <Button.KeyboardAccelerators>
+                        <KeyboardAccelerator Key="S" Modifiers="Control" />
+                    </Button.KeyboardAccelerators>
                     <StackPanel Orientation="Horizontal" Spacing="8">
-                        <FontIcon FontSize="14" Glyph="&#xE8AC;" />
-                        <TextBlock Text="按顺序重命名" />
+                        <FontIcon FontSize="14" Glyph="&#xE74E;" />
+                        <TextBlock Text="保存" />
                     </StackPanel>
                 </Button>
             </StackPanel>
         </Grid>
 
-        <!--  Content layer  -->
+        <!--  Content  -->
         <Grid
             Grid.Row="1"
             Margin="12,0,12,12"
-            Background="{ThemeResource LayerFillColorDefaultBrush}"
-            BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-            BorderThickness="1"
-            CornerRadius="8">
-            <GridView
-                x:Name="ImageGrid"
-                Padding="12,12,4,12"
-                AllowDrop="True"
-                CanDragItems="True"
-                CanReorderItems="True"
-                DoubleTapped="ImageGrid_DoubleTapped"
-                DragItemsCompleted="ImageGrid_DragItemsCompleted"
-                DragItemsStarting="ImageGrid_DragItemsStarting"
-                ItemsSource="{x:Bind Items}"
-                KeyDown="ImageGrid_KeyDown"
-                SelectionChanged="ImageGrid_SelectionChanged"
-                SelectionMode="Extended">
-                <GridView.ItemTemplate>
-                    <DataTemplate x:DataType="models:ImageItem">
-                        <Grid
-                            Width="160"
-                            Padding="6"
-                            Background="Transparent"
-                            ContextFlyout="{StaticResource ItemMenu}"
-                            RowSpacing="6"
-                            ToolTipService.ToolTip="{x:Bind FileName, Mode=OneWay}">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="148" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <Border Background="{ThemeResource ControlFillColorSecondaryBrush}" CornerRadius="4">
-                                <Image Source="{x:Bind Thumbnail, Mode=OneWay}" Stretch="Uniform" />
-                            </Border>
-                            <Border
-                                MinWidth="24"
-                                Margin="6"
-                                Padding="6,1"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Top"
-                                Background="{ThemeResource AcrylicInAppFillColorDefaultBrush}"
-                                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                                BorderThickness="1"
-                                CornerRadius="4">
-                                <TextBlock
+            ColumnSpacing="12">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <!--  Main list  -->
+            <Grid
+                Background="{ThemeResource LayerFillColorDefaultBrush}"
+                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                BorderThickness="1"
+                CornerRadius="8">
+                <GridView
+                    x:Name="ImageGrid"
+                    Padding="12,12,4,12"
+                    AllowDrop="True"
+                    CanDragItems="True"
+                    CanReorderItems="True"
+                    DoubleTapped="AnyGrid_DoubleTapped"
+                    DragItemsCompleted="AnyGrid_DragItemsCompleted"
+                    DragItemsStarting="AnyGrid_DragItemsStarting"
+                    ItemContainerStyle="{StaticResource StretchGridViewItemStyle}"
+                    ItemsSource="{x:Bind Items}"
+                    KeyDown="AnyGrid_KeyDown"
+                    Loaded="ImageGrid_Loaded"
+                    SelectionChanged="ImageGrid_SelectionChanged"
+                    SelectionMode="Extended">
+                    <GridView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <ItemsWrapGrid Background="Transparent" Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </GridView.ItemsPanel>
+                    <GridView.ItemTemplate>
+                        <DataTemplate x:DataType="models:ImageItem">
+                            <Grid
+                                Padding="6"
+                                Background="Transparent"
+                                ContextFlyout="{StaticResource ItemMenu}"
+                                RowSpacing="6"
+                                ToolTipService.ToolTip="{x:Bind FileName, Mode=OneWay}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Border
+                                    Background="{ThemeResource ControlFillColorSecondaryBrush}"
+                                    CornerRadius="4"
+                                    Opacity="{x:Bind ContentOpacity, Mode=OneWay}">
+                                    <Image Source="{x:Bind Thumbnail, Mode=OneWay}" Stretch="Uniform" />
+                                </Border>
+                                <Border
+                                    MinWidth="24"
+                                    Margin="6"
+                                    Padding="6,1"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
+                                    Background="{ThemeResource AcrylicInAppFillColorDefaultBrush}"
+                                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                                    BorderThickness="1"
+                                    CornerRadius="4"
+                                    Visibility="{x:Bind PositionVisibility, Mode=OneWay}">
+                                    <TextBlock
+                                        HorizontalAlignment="Center"
+                                        Style="{StaticResource CaptionTextBlockStyle}"
+                                        Text="{x:Bind PositionText, Mode=OneWay}" />
+                                </Border>
+                                <Border
+                                    Width="36"
+                                    Height="36"
                                     HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Background="{ThemeResource SystemFillColorCriticalBrush}"
+                                    CornerRadius="18"
+                                    Visibility="{x:Bind DeleteMarkVisibility, Mode=OneWay}">
+                                    <FontIcon
+                                        FontSize="16"
+                                        Foreground="White"
+                                        Glyph="&#xE74D;" />
+                                </Border>
+                                <TextBlock
+                                    Grid.Row="1"
+                                    HorizontalAlignment="Center"
+                                    Opacity="{x:Bind ContentOpacity, Mode=OneWay}"
                                     Style="{StaticResource CaptionTextBlockStyle}"
-                                    Text="{x:Bind PositionText, Mode=OneWay}" />
-                            </Border>
+                                    Text="{x:Bind FileName, Mode=OneWay}"
+                                    TextTrimming="CharacterEllipsis"
+                                    TextWrapping="NoWrap" />
+                            </Grid>
+                        </DataTemplate>
+                    </GridView.ItemTemplate>
+                </GridView>
+
+                <StackPanel
+                    x:Name="EmptyState"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Spacing="12">
+                    <FontIcon
+                        FontSize="48"
+                        Foreground="{ThemeResource TextFillColorTertiaryBrush}"
+                        Glyph="&#xE91B;" />
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        Style="{StaticResource BodyStrongTextBlockStyle}"
+                        Text="打开或拖入一个图片文件夹" />
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                        Style="{StaticResource CaptionTextBlockStyle}"
+                        Text="拖拽调整顺序、放入暂存区、标记删除，最后一次性保存" />
+                    <Button
+                        Margin="0,8,0,0"
+                        HorizontalAlignment="Center"
+                        Click="OpenFolder_Click"
+                        Content="打开文件夹"
+                        Style="{StaticResource AccentButtonStyle}" />
+                </StackPanel>
+
+                <ProgressBar
+                    x:Name="BusyBar"
+                    VerticalAlignment="Top"
+                    IsIndeterminate="True"
+                    Visibility="Collapsed" />
+            </Grid>
+
+            <!--  Staging areas  -->
+            <Grid
+                x:Name="StagingPanel"
+                Grid.Column="1"
+                Width="280"
+                Background="{ThemeResource LayerFillColorDefaultBrush}"
+                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                BorderThickness="1"
+                CornerRadius="8"
+                RowSpacing="4">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid Padding="14,8,6,0">
+                    <TextBlock
+                        VerticalAlignment="Center"
+                        Style="{StaticResource BodyStrongTextBlockStyle}"
+                        Text="暂存区" />
+                    <Button
+                        x:Name="AddStagingButton"
+                        HorizontalAlignment="Right"
+                        Click="AddStaging_Click"
+                        Style="{StaticResource SubtleButtonStyle}"
+                        ToolTipService.ToolTip="新建暂存区">
+                        <FontIcon FontSize="14" Glyph="&#xE710;" />
+                    </Button>
+                </Grid>
+                <ScrollViewer Grid.Row="1" Padding="8,0,8,8">
+                    <StackPanel Spacing="8">
+                        <ItemsControl ItemsSource="{x:Bind StagingAreas}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Spacing="8" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate x:DataType="models:StagingArea">
+                                    <Grid
+                                        Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                                        BorderThickness="1"
+                                        CornerRadius="6">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <Grid Padding="4,4,2,0" ColumnSpacing="4">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <TextBox
+                                                MinHeight="0"
+                                                Padding="6,4"
+                                                Background="Transparent"
+                                                BorderThickness="0"
+                                                Text="{x:Bind Name, Mode=TwoWay}"
+                                                ToolTipService.ToolTip="点击修改名称" />
+                                            <TextBlock
+                                                Grid.Column="1"
+                                                VerticalAlignment="Center"
+                                                Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                                Style="{StaticResource CaptionTextBlockStyle}"
+                                                Text="{x:Bind CountText, Mode=OneWay}" />
+                                            <Button
+                                                Grid.Column="2"
+                                                Padding="6"
+                                                Style="{StaticResource SubtleButtonStyle}">
+                                                <FontIcon FontSize="12" Glyph="&#xE712;" />
+                                                <Button.Flyout>
+                                                    <MenuFlyout>
+                                                        <MenuFlyoutItem Click="StagingRestoreAll_Click" Tag="{x:Bind}" Text="全部放回列表末尾">
+                                                            <MenuFlyoutItem.Icon>
+                                                                <FontIcon Glyph="&#xE74B;" />
+                                                            </MenuFlyoutItem.Icon>
+                                                        </MenuFlyoutItem>
+                                                        <MenuFlyoutItem Click="StagingRemove_Click" Tag="{x:Bind}" Text="移除暂存区（图片放回末尾）">
+                                                            <MenuFlyoutItem.Icon>
+                                                                <FontIcon Glyph="&#xE711;" />
+                                                            </MenuFlyoutItem.Icon>
+                                                        </MenuFlyoutItem>
+                                                    </MenuFlyout>
+                                                </Button.Flyout>
+                                            </Button>
+                                        </Grid>
+                                        <GridView
+                                            Grid.Row="1"
+                                            MinHeight="84"
+                                            Padding="6,4,0,6"
+                                            AllowDrop="True"
+                                            Background="Transparent"
+                                            CanDragItems="True"
+                                            CanReorderItems="True"
+                                            DoubleTapped="AnyGrid_DoubleTapped"
+                                            DragItemsCompleted="AnyGrid_DragItemsCompleted"
+                                            DragItemsStarting="AnyGrid_DragItemsStarting"
+                                            ItemsSource="{x:Bind Items}"
+                                            KeyDown="AnyGrid_KeyDown"
+                                            Loaded="StagingGrid_Loaded"
+                                            Unloaded="StagingGrid_Unloaded"
+                                            ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                                            ScrollViewer.VerticalScrollMode="Disabled"
+                                            SelectionMode="Extended">
+                                            <GridView.ItemTemplate>
+                                                <DataTemplate x:DataType="models:ImageItem">
+                                                    <Grid
+                                                        Width="76"
+                                                        Height="76"
+                                                        Padding="2"
+                                                        Background="Transparent"
+                                                        ContextFlyout="{StaticResource ItemMenu}"
+                                                        ToolTipService.ToolTip="{x:Bind FileName, Mode=OneWay}">
+                                                        <Border
+                                                            Background="{ThemeResource ControlFillColorSecondaryBrush}"
+                                                            CornerRadius="4"
+                                                            Opacity="{x:Bind ContentOpacity, Mode=OneWay}">
+                                                            <Image Source="{x:Bind Thumbnail, Mode=OneWay}" Stretch="Uniform" />
+                                                        </Border>
+                                                        <Border
+                                                            Width="24"
+                                                            Height="24"
+                                                            HorizontalAlignment="Center"
+                                                            VerticalAlignment="Center"
+                                                            Background="{ThemeResource SystemFillColorCriticalBrush}"
+                                                            CornerRadius="12"
+                                                            Visibility="{x:Bind DeleteMarkVisibility, Mode=OneWay}">
+                                                            <FontIcon
+                                                                FontSize="12"
+                                                                Foreground="White"
+                                                                Glyph="&#xE74D;" />
+                                                        </Border>
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </GridView.ItemTemplate>
+                                        </GridView>
+                                        <TextBlock
+                                            Grid.Row="1"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            Foreground="{ThemeResource TextFillColorTertiaryBrush}"
+                                            IsHitTestVisible="False"
+                                            Style="{StaticResource CaptionTextBlockStyle}"
+                                            Text="拖入图片"
+                                            Visibility="{x:Bind EmptyVisibility, Mode=OneWay}" />
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+
+                        <!--  Drop here to create a new area  -->
+                        <Border
+                            x:Name="NewStagingDropZone"
+                            MinHeight="64"
+                            Padding="12"
+                            AllowDrop="True"
+                            Background="Transparent"
+                            BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                            BorderThickness="1"
+                            CornerRadius="6"
+                            DragOver="NewStagingDropZone_DragOver"
+                            Drop="NewStagingDropZone_Drop">
                             <TextBlock
-                                Grid.Row="1"
                                 HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Foreground="{ThemeResource TextFillColorTertiaryBrush}"
                                 Style="{StaticResource CaptionTextBlockStyle}"
-                                Text="{x:Bind FileName, Mode=OneWay}"
-                                TextTrimming="CharacterEllipsis"
-                                TextWrapping="NoWrap" />
-                        </Grid>
-                    </DataTemplate>
-                </GridView.ItemTemplate>
-            </GridView>
-
-            <StackPanel
-                x:Name="EmptyState"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                Spacing="12">
-                <FontIcon
-                    FontSize="48"
-                    Foreground="{ThemeResource TextFillColorTertiaryBrush}"
-                    Glyph="&#xE91B;" />
-                <TextBlock
-                    HorizontalAlignment="Center"
-                    Style="{StaticResource BodyStrongTextBlockStyle}"
-                    Text="打开或拖入一个图片文件夹" />
-                <TextBlock
-                    HorizontalAlignment="Center"
-                    Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                    Style="{StaticResource CaptionTextBlockStyle}"
-                    Text="拖拽（可多选）调整顺序，再按新顺序批量重命名" />
-                <Button
-                    Margin="0,8,0,0"
-                    HorizontalAlignment="Center"
-                    Click="OpenFolder_Click"
-                    Content="打开文件夹"
-                    Style="{StaticResource AccentButtonStyle}" />
-            </StackPanel>
-
-            <ProgressBar
-                x:Name="BusyBar"
-                VerticalAlignment="Top"
-                IsIndeterminate="True"
-                Visibility="Collapsed" />
+                                Text="拖到这里新建暂存区"
+                                TextAlignment="Center"
+                                TextWrapping="Wrap" />
+                        </Border>
+                    </StackPanel>
+                </ScrollViewer>
+            </Grid>
         </Grid>
 
         <InfoBar
@@ -322,72 +600,84 @@
             </Border>
         </Grid>
 
-        <!--  Rename dialog  -->
+        <!--  Save dialog  -->
         <ContentDialog
-            x:Name="RenameDialog"
-            Title="按当前顺序重命名"
+            x:Name="SaveDialog"
+            Title="保存更改"
             CloseButtonText="取消"
             DefaultButton="Primary"
-            PrimaryButtonText="重命名">
-            <StackPanel Width="380" Spacing="12">
-                <Grid ColumnSpacing="12">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <TextBox
-                        x:Name="PrefixBox"
-                        Header="前缀"
-                        PlaceholderText="例如 IMG_" />
-                    <TextBox
-                        x:Name="SuffixBox"
-                        Grid.Column="1"
-                        Header="后缀"
-                        PlaceholderText="可选" />
-                </Grid>
-                <Grid ColumnSpacing="12">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <NumberBox
-                        x:Name="StartBox"
-                        Header="起始序号"
-                        Minimum="0"
-                        SpinButtonPlacementMode="Compact"
-                        Value="1" />
-                    <NumberBox
-                        x:Name="DigitsBox"
-                        Grid.Column="1"
-                        Header="序号位数"
-                        Maximum="10"
-                        Minimum="1"
-                        SpinButtonPlacementMode="Compact"
-                        Value="3" />
-                </Grid>
-                <CheckBox x:Name="StripOnRenameBox" Content="同时移除 EXIF 信息（不可撤销）" />
-                <StackPanel Spacing="4">
-                    <TextBlock
-                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                        Style="{StaticResource CaptionTextBlockStyle}"
-                        Text="预览" />
-                    <Border
-                        Padding="10,8"
-                        Background="{ThemeResource ControlFillColorSecondaryBrush}"
-                        CornerRadius="4">
+            PrimaryButtonText="保存">
+            <StackPanel Width="400" Spacing="12">
+                <CheckBox x:Name="RenameOnSaveBox" Content="按当前顺序重命名" IsChecked="True" />
+                <StackPanel x:Name="RenameOptionsPanel" Spacing="12">
+                    <Grid ColumnSpacing="12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBox
+                            x:Name="PrefixBox"
+                            Header="前缀"
+                            PlaceholderText="例如 IMG_" />
+                        <TextBox
+                            x:Name="SuffixBox"
+                            Grid.Column="1"
+                            Header="后缀"
+                            PlaceholderText="可选" />
+                    </Grid>
+                    <Grid ColumnSpacing="12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <NumberBox
+                            x:Name="StartBox"
+                            Header="起始序号"
+                            Minimum="0"
+                            SpinButtonPlacementMode="Compact"
+                            Value="1" />
+                        <NumberBox
+                            x:Name="DigitsBox"
+                            Grid.Column="1"
+                            Header="序号位数"
+                            Maximum="10"
+                            Minimum="1"
+                            SpinButtonPlacementMode="Compact"
+                            Value="3" />
+                    </Grid>
+                    <ComboBox
+                        x:Name="StagingModeBox"
+                        HorizontalAlignment="Stretch"
+                        Header="暂存区中的图片"
+                        SelectedIndex="0">
+                        <x:String>按暂存区顺序追加到末尾</x:String>
+                        <x:String>保持原文件名不动</x:String>
+                    </ComboBox>
+                    <CheckBox x:Name="StripOnRenameBox" Content="同时移除 EXIF 信息（不可撤销）" />
+                    <StackPanel Spacing="4">
                         <TextBlock
-                            x:Name="RenamePreviewText"
-                            FontFamily="Consolas"
-                            FontSize="12"
-                            TextWrapping="Wrap" />
-                    </Border>
-                    <TextBlock
-                        x:Name="RenameErrorText"
-                        Foreground="{ThemeResource SystemFillColorCriticalBrush}"
-                        Style="{StaticResource CaptionTextBlockStyle}"
-                        TextWrapping="Wrap"
-                        Visibility="Collapsed" />
+                            Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                            Style="{StaticResource CaptionTextBlockStyle}"
+                            Text="预览" />
+                        <Border
+                            Padding="10,8"
+                            Background="{ThemeResource ControlFillColorSecondaryBrush}"
+                            CornerRadius="4">
+                            <TextBlock
+                                x:Name="RenamePreviewText"
+                                FontFamily="Consolas"
+                                FontSize="12"
+                                TextWrapping="Wrap" />
+                        </Border>
+                    </StackPanel>
                 </StackPanel>
+                <TextBlock x:Name="SaveSummaryText" TextWrapping="Wrap" />
+                <TextBlock
+                    x:Name="RenameErrorText"
+                    Foreground="{ThemeResource SystemFillColorCriticalBrush}"
+                    Style="{StaticResource CaptionTextBlockStyle}"
+                    TextWrapping="Wrap"
+                    Visibility="Collapsed" />
             </StackPanel>
         </ContentDialog>
     </Grid>

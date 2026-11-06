@@ -29,6 +29,21 @@ public sealed partial class MainWindow : Window
 
         // Navigate the root frame to the main page on startup.
         RootFrame.Navigate(typeof(MainPage));
+
+        AppWindow.Closing += AppWindow_Closing;
+    }
+
+    private bool _closeConfirmed;
+
+    private async void AppWindow_Closing(Microsoft.UI.Windowing.AppWindow sender, Microsoft.UI.Windowing.AppWindowClosingEventArgs args)
+    {
+        if (_closeConfirmed || RootFrame.Content is not MainPage page || !page.HasPendingChanges) return;
+        args.Cancel = true;
+        if (await page.ConfirmDiscardAsync())
+        {
+            _closeConfirmed = true;
+            Close();
+        }
     }
 
     [DllImport("user32.dll")]
